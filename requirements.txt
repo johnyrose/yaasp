@@ -1,0 +1,4 @@
+yfinance
+openai
+newsapi-python
+pydantic
