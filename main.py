@@ -27,3 +27,8 @@ if __name__ == '__main__':
             print(report.dict())
         except Exception as e:
             print(f'Failed to generate report for {symbol} with error: {e}')
+
+# TODO:
+# Add more news sources
+# Remove the "recommended_amount" from the report and find a better way to actually get the amount, as if find info
+# About the investor & their interests & financial situation before recommending numbers.
