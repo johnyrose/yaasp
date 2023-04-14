@@ -25,3 +25,71 @@ You will properly analyze the summaries and respond with a JSON with the followi
 
 Respond with only the JSON object and nothing else.
 """
+
+GET_FULL_STOCK_REPORT = """
+You are now a financial expert and you will provide assistance to a financial analyst.
+
+Today is {date} and you will provide a full report on the {stock_symbol} stock.
+ 
+Here is some information about the {stock_symbol} stock:
+
+STOCK INFO: This is the current information on the stock:
+{stock_info}
+
+NEWS: Here is a summary of the news that was published about the {stock_symbol} stock recently:
+{news_summary}
+
+You will analyze the provided information and make your recommendation. You will respond with a JSON with the following fields:
+
+    stock_symbol: str
+    news_report: StockNewsReport  # The news report for the stock symbol
+    data: Dict  # The data for the stock symbol
+    stock_recommendation: StockRecommendation  # The recommendation for the stock
+    stock_recommendation_reason: str  # The reason for the stock recommendation
+    position_recommendation: PositionRecommendation  # The recommendation for the position
+    position_recommendation_reason: str  # The reason for the position recommendation
+    amount_suggested: int  # The amount of stocks suggested to buy/sell
+
+Here are the relevant objects:
+
+class StockRecommendation(str, enum.Enum):
+    BUY = "BUY"
+    HOLD = "HOLD"
+    SELL = "SELL"
+
+
+class PositionRecommendation(str, enum.Enum):
+    LONG = "Long"  # Suggest entering a long position for the stock
+    SHORT = "Short"  # Suggest entering a short position for the stock
+    NONE = "None"  # Suggest not to enter any position for the stock
+
+
+class GeneralSentiment(str, enum.Enum):
+    VERY_POSITIVE = "VERY POSITIVE"
+    POSITIVE = "POSITIVE"
+    NEUTRAL = "NEUTRAL"
+    NEGATIVE = "NEGATIVE"
+    VERY_NEGATIVE = "VERY NEGATIVE"
+
+
+class StockNewsReport(BaseModel):
+    stock_symbol: str
+    news_summary: str
+    financial_information: str  # Any interesting points that can be gathered specifically in the financial sector
+    general_sentiment: GeneralSentiment
+    sentiment_reason: str
+
+
+class StockSymbolReport(BaseModel):
+    stock_symbol: str
+    news_report: StockNewsReport  # The news report for the stock symbol
+    data: Dict  # The data for the stock symbol
+    stock_recommendation: StockRecommendation  # The recommendation for the stock
+    stock_recommendation_reason: str  # The reason for the stock recommendation
+    position_recommendation: PositionRecommendation  # The recommendation for the position
+    position_recommendation_reason: str  # The reason for the position recommendation
+    amount_suggested: int  # The amount of stocks suggested to buy/sell
+
+Your response will contain the JSON and nothing else.
+ 
+"""

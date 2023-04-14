@@ -3,6 +3,7 @@ from data_collection.news_collection.marketaux_collector import MarketauxNewsCol
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 from stock_analysis.models import StockNewsReport, GeneralSentiment
 from stock_analysis.news_report_generator import generate_news_report
+from stock_analysis.stock_symbol_report_generator import generate_stock_symbol_report
 
 if __name__ == '__main__':
     # r = MarketauxNewsCollector('VOO')
@@ -18,4 +19,5 @@ if __name__ == '__main__':
         sentiment_reason="Cathie Wood's purchase of MSFT stock and its inclusion in the top 10 dividend growth stocks point towards a positive outlook."
     )
     stock_info = get_stock_info('MSFT')
-    print(report)
+    full_report = generate_stock_symbol_report('MSFT', report, stock_info)
+    print(full_report.dict())
