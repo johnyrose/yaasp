@@ -53,9 +53,9 @@ class StockRecommendation(str, enum.Enum):
 
 
 class PositionRecommendation(str, enum.Enum):
-    LONG = "Long"  # Suggest entering a long position for the stock
-    SHORT = "Short"  # Suggest entering a short position for the stock
-    NONE = "None"  # Suggest not to enter any position for the stock
+    LONG = "LONG"  # Suggest entering a long position for the stock
+    SHORT = "SHORT"  # Suggest entering a short position for the stock
+    NONE = "NONE"  # Suggest not to enter any position for the stock
 
 
 class GeneralSentiment(str, enum.Enum):
