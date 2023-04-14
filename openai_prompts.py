@@ -43,18 +43,8 @@ STOCK INFO: This is the current information on the stock:
 NEWS: Here is a summary of the news that was published about the {stock_symbol} stock recently:
 {news_summary}
 
-You will analyze the provided information and make your recommendation. You will respond with a JSON with the following fields:
 
-    stock_symbol: str
-    news_report: StockNewsReport  # The news report for the stock symbol
-    data: Dict  # The data for the stock symbol
-    stock_recommendation: StockRecommendation  # The recommendation for the stock
-    stock_recommendation_reason: str  # The reason for the stock recommendation
-    position_recommendation: PositionRecommendation  # The recommendation for the position
-    position_recommendation_reason: str  # The reason for the position recommendation
-    amount_suggested: int  # The amount of stocks suggested to buy/sell
-
-Here are the relevant objects:
+Here some relevant objects:
 
 class StockRecommendation(str, enum.Enum):
     BUY = "BUY"
@@ -83,8 +73,8 @@ class StockNewsReport(BaseModel):
     general_sentiment: GeneralSentiment
     sentiment_reason: str
 
+You will analyze the provided information about the stock symbol and make your recommendation. You will respond with a JSON with the following fields:
 
-class StockSymbolReport(BaseModel):
     stock_symbol: str
     stock_recommendation: StockRecommendation  # The recommendation for the stock
     stock_recommendation_reason: str  # The reason for the stock recommendation
@@ -102,6 +92,6 @@ When writing the confidence level, consider the following:
  
 When writing the confidence explanation, explain why you chose the confidence level you chose, and consider the parameters mentioned above.
 
-Your response will contain the JSON and nothing else.
+Your response will contain the JSON and nothing else. The JSON must be valid.
  
 """
