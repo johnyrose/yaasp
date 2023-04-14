@@ -3,7 +3,7 @@ import json
 from data_collection.company_stock_data_collector import get_stock_info
 from data_collection.news_collection.marketaux_collector import MarketauxNewsCollector
 from data_collection.news_collection.news_api_collector import NewsAPICollector
-from stock_analysis.models import StockNewsReport, GeneralSentiment, ArticleSummary, StockSymbolReport
+from stock_analysis.models import StockSymbolReport
 from stock_analysis.news_report_generator import generate_news_report
 from stock_analysis.stock_symbol_report_generator import generate_stock_symbol_report
 
