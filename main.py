@@ -17,4 +17,5 @@ if __name__ == '__main__':
         general_sentiment=GeneralSentiment.POSITIVE,
         sentiment_reason="Cathie Wood's purchase of MSFT stock and its inclusion in the top 10 dividend growth stocks point towards a positive outlook."
     )
+    stock_info = get_stock_info('MSFT')
     print(report)

@@ -25,7 +25,8 @@ def _get_news_report(stock_symbol: str, article_summaries: List[str]) -> StockNe
     retry_count = 4  # TODO - Make this configurable
     for i in range(retry_count):
         try:
-            openai_response = get_openai_response(prompt=prompt, model_type=OpenAIModelType.GPT_4)
+            openai_response = get_openai_response(prompt=prompt, model_type=OpenAIModelType.GPT_35_TURBO)
+            #  Making a summary is pretty "easy" for a language model, so we'll use the quicker and cheaper GPT3.5 model
             response_json = json.loads(openai_response)
             return StockNewsReport(**response_json)
         except Exception as e:
