@@ -90,7 +90,7 @@ When writing the confidence level, consider the following:
  - The quality of the data
  - How much the data can actually contribute to choosing whether to buy the stock or not.
  
-When writing the confidence explanation, explain why you chose the confidence level you chose, and consider the parameters mentioned above.
+When writing the confidence explanation, explain why you chose the confidence level you chose, and consider the parameters mentioned above. If something lowered your confidence, explain what it was and what suggestions you have to provide better information.
 
 Your response will contain the JSON and nothing else. The JSON must be valid.
  

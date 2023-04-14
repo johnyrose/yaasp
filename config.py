@@ -1,9 +1,12 @@
 import os
 
+from stock_analysis.models import OpenAIModelType
+
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 MARKETAUX_API_KEY = os.getenv('MARKETAUX_API_KEY')
 
 
-OPENAI_MODEL = 'gpt-3.5-turbo'
+OPENAI_MODEL_FOR_SIMPLE_TASKS = OpenAIModelType.GPT_35_TURBO
+OPENAI_MODEL_FOR_COMPLICATED_TASKS = OpenAIModelType.GPT_4
