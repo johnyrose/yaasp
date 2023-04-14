@@ -3,7 +3,7 @@ import yfinance as yf
 from data_collection.models import CompanyStockInfo
 
 
-def get_company_stock_info(company_symbol: str) -> CompanyStockInfo:
+def get_stock_info(company_symbol: str) -> CompanyStockInfo:
     ticker = yf.Ticker(company_symbol)
     info = ticker.info
 
