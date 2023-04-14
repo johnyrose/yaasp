@@ -22,5 +22,10 @@ class NewsAPICollector(NewsCollectorBase):
         :return:
         """
         articles = self.newsapi.get_everything(q=self.query, page_size=num_articles, *args, **kwargs)
-        return [NewsArticle(source=article['source']['name'], title=article['title'], body=article['description'])
-                for article in articles['articles']]
+        return [NewsArticle(
+            source=article['source']['name'],
+            title=article['title'],
+            body=article['description'],
+            date=article['publishedAt']
+            )
+            for article in articles['articles']]

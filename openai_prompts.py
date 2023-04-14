@@ -22,6 +22,10 @@ You will properly analyze the summaries and respond with a JSON with the followi
 - "financial_information": <1 sentence that explains the financial information you found in the summaries that could be interesting>,
 - "news_summary": <A 3-paragraph (each paragraph 2-3 sentences) summary of all the news about the company that you received. Include any interesting information to a financial analyst if you find any >
 - "stock_symbol": <The stock symbol of the company you are analyzing>
+- "articles_summary": A list of shortened summaries for each article. Each item in the list will be of the following structure:
+class ArticleSummary(BaseModel):
+    summary: str
+    date: str  # The publication date of the article
 
 Respond with only the JSON object and nothing else.
 """

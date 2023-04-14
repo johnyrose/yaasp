@@ -5,6 +5,7 @@ class NewsArticle(BaseModel):
     source: str
     title: str
     body: str
+    date: str
 
 
 class CompanyStockInfo(BaseModel):

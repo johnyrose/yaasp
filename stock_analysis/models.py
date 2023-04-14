@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 from pydantic import BaseModel
 import enum
@@ -29,12 +29,18 @@ class GeneralSentiment(str, enum.Enum):
     VERY_NEGATIVE = "VERY NEGATIVE"
 
 
+class ArticleSummary(BaseModel):
+    summary: str
+    date: str
+
+
 class StockNewsReport(BaseModel):
     stock_symbol: str
     news_summary: str
     financial_information: str  # Any interesting points that can be gathered specifically in the financial sector
     general_sentiment: GeneralSentiment
     sentiment_reason: str
+    articles_summary: List[ArticleSummary]
 
 
 class StockSymbolReport(BaseModel):

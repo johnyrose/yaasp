@@ -36,7 +36,8 @@ class MarketauxNewsCollector(NewsCollectorBase):
             NewsArticle(
                 source=article['source'],
                 title=article['title'],
-                body=article['description']
+                body=article['description'],
+                date=article['published_at']
             )
             for article in data['data']
         ]
