@@ -1,8 +1,7 @@
 import openai
 
 from config import OPENAI_API_KEY
-from openai_analyzer.models import OpenAIModelType
-
+from stock_analysis.models import OpenAIModelType
 
 openai.api_key = OPENAI_API_KEY
 
