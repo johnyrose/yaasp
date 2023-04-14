@@ -86,13 +86,21 @@ class StockNewsReport(BaseModel):
 
 class StockSymbolReport(BaseModel):
     stock_symbol: str
-    news_report: StockNewsReport  # The news report for the stock symbol
-    data: Dict  # The data for the stock symbol
     stock_recommendation: StockRecommendation  # The recommendation for the stock
     stock_recommendation_reason: str  # The reason for the stock recommendation
     position_recommendation: PositionRecommendation  # The recommendation for the position
     position_recommendation_reason: str  # The reason for the position recommendation
     amount_suggested: int  # The amount of stocks suggested to buy/sell
+    confidence_level: int  # A number from 1 to 10, 10 being the highest confidence level. This is how confident the model is in its recommendation.
+    confidence_explanation: str  # An explanation of the confidence level
+
+When writing the confidence level, consider the following:
+ - The date / relevance of the data
+ - The relation of the data to the stock symbol, especially the news
+ - The quality of the data
+ - How much the data can actually contribute to choosing whether to buy the stock or not.
+ 
+When writing the confidence explanation, explain why you chose the confidence level you chose, and consider the parameters mentioned above.
 
 Your response will contain the JSON and nothing else.
  

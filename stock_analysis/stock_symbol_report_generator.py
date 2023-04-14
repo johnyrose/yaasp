@@ -19,5 +19,7 @@ def generate_stock_symbol_report(stock_symbol: str, news_report: StockNewsReport
     )
     openai_response = get_openai_response(prompt, OpenAIModelType.GPT_4)
     response_json = json.loads(openai_response)
+    response_json["news_report"] = news_report
+    response_json["data"] = stock_data
     return StockSymbolReport(**response_json)
 

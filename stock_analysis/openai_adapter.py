@@ -14,4 +14,5 @@ def get_openai_response(prompt: str, model_type: OpenAIModelType = OpenAIModelTy
       ]
     )
     response = completion.choices[0].message.content
+    print(f"OpenAI response: {response}")
     return response

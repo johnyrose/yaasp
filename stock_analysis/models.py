@@ -52,3 +52,6 @@ class StockSymbolReport(BaseModel):
     position_recommendation: PositionRecommendation  # The recommendation for the position
     position_recommendation_reason: str  # The reason for the position recommendation
     amount_suggested: int  # The amount of stocks suggested to buy/sell
+    confidence_level: int  # A number from 1 to 10, 10 being the highest confidence level. This is how confident the
+    # model is in its recommendation.
+    confidence_explanation: str  # An explanation of the confidence level
