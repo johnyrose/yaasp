@@ -37,7 +37,7 @@ Today is {date} and you will provide a full report on the {stock_symbol} stock.
  
 Here is some information about the {stock_symbol} stock:
 
-STOCK INFO: This is the current information on the stock:
+STOCK INFO: This is the current financial information on the stock:
 {stock_info}
 
 NEWS: Here is a summary of the news that was published about the {stock_symbol} stock recently:

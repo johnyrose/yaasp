@@ -3,26 +3,31 @@ import os
 from actions.generate_full_stock_report import generate_stock_report
 from common.shorten_report import get_shortened_stock_symbol_report
 from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info
+from export.export_stock_report_to_pdf import export_stock_report_to_pdf
 from recommendations_generator.get_recommendations import get_recommendations
 from recommendations_generator.models import RiskPreference
 from stock_analysis.models import StockSymbolReport
 
 if __name__ == '__main__':
-    symbols = ["MSFT", "GOOG", "VOO", "INTC", "AMD", "EA", "ATVI", "SONY"]
-    for symbol in symbols:
-        try:
-            report = generate_stock_report(symbol)
-            with open(f'stock_report_{symbol}.json', 'w') as f:
-                f.write(json.dumps(report.dict(), indent=4))
-            print(report.dict())
-        except Exception as e:
-            print(f'Failed to generate report for {symbol} with error: {e}')
-    # files = os.listdir()
-    # json_files = [f for f in files if f.startswith('stock_report') and f.endswith('.json')]
-    # stock_reports = []
-    # for file in json_files:
-    #     with open(file, 'r') as f:
-    #         stock_reports.append(StockSymbolReport(**json.loads(f.read())))
+    # symbols = ["MSFT", "GOOG", "VOO", "INTC", "AMD", "EA", "ATVI", "SONY"]
+    # for symbol in symbols:
+    #     try:
+    #         report = generate_stock_report(symbol)
+    #         with open(f'stock_report_{symbol}.json', 'w') as f:
+    #             f.write(json.dumps(report.dict(), indent=4))
+    #         print(report.dict())
+    #     except Exception as e:
+    #         print(f'Failed to generate report for {symbol} with error: {e}')
+    files = os.listdir()
+    json_files = [f for f in files if f.startswith('stock_report') and f.endswith('.json')]
+    stock_reports = []
+    for file in json_files:
+        with open(file, 'r') as f:
+            stock_reports.append(StockSymbolReport(**json.loads(f.read())))
+
+    for report in stock_reports:
+        export_stock_report_to_pdf(report, f'{report.stock_symbol}_report.pdf')
+
     # current_situation = """
     # Here is my current portfolio CSV:
     # "Symbol","Description","Quantity","MarkPrice","FifoPnlUnrealized","OpenPrice","ReportDate"
