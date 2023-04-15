@@ -5,6 +5,7 @@ from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.shorten_report import get_shortened_stock_symbol_report
 from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
+from export.export_reports_to_json import export_purchase_recommendation
 from openai_prompts import GET_STOCK_RECOMMENDATION
 from recommendations_generator.models import RiskPreference, PurchaseRecommendation
 from stock_analysis.models import StockSymbolReport
@@ -29,7 +30,9 @@ def get_recommendations(stock_reports: List[StockSymbolReport], current_situatio
             response = get_openai_response(prompt, model_type=OPENAI_MODEL_FOR_COMPLICATED_TASKS)
             response_json = json.loads(response)
             logger.info(f"Got recommendations for stock reports. Recommendations: {response_json}")
-            return PurchaseRecommendation(**response_json)
+            purchase_recommendation = PurchaseRecommendation(**response_json)
+            export_purchase_recommendation(purchase_recommendation)
+            return purchase_recommendation
         except Exception as e:
             logger.error(f"Failed to get recommendations for stock reports: {stock_reports}. Error: {e}. Retrying...")
     raise Exception(f"Failed to get recommendations for stock reports: {stock_reports} after {retry_amount} retries.")
