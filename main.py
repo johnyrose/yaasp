@@ -1,6 +1,7 @@
 import json
 import os
 from actions.generate_full_stock_report import generate_stock_report
+from common.shorten_report import get_shortened_stock_symbol_report
 from recommendations_generator.get_recommendations import get_recommendations
 from recommendations_generator.models import RiskPreference
 from stock_analysis.models import StockSymbolReport
@@ -34,13 +35,10 @@ if __name__ == '__main__':
     "NVDA","NVIDIA CORP","4","264.63","-36.94","273.865","2023-04-13"
     "VOO","VANGUARD S&P 500 ETF","24","379.77","85.048","376.226333333","2023-04-13"
     
-    I like technology and video games
+    I like technology and video games. I have about 300 USD I want to invest. I want to invest for the short term to make a quick profit, not the long term.
     """
+
     recs = get_recommendations(stock_reports, current_situation, RiskPreference.MODERATE)
     print(recs.dict())
     with open('recommendations.json', 'w') as f:
         f.write(json.dumps(recs.dict(), indent=4))
-
-# TODO:
-# Add more news sources
-# About the investor & their interests & financial situation before recommending numbers.

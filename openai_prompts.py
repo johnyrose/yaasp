@@ -129,7 +129,7 @@ class PurchaseRecommendation(BaseModel):
     confidence_level: int  # A number from 1 to 10, 10 being the highest confidence level. 
     # This is how confident the model is in its recommendation.
     
-Your response will be a JSON that firs the PurchaseRecommendation model. The JSON must be valid. In each stock recommendation
+Your response will be a JSON that fits the PurchaseRecommendation model. The JSON must be valid. In each stock recommendation
 you will provide an explanation for your recommendation and consider all the parameters mentioned below.
 
 The explanation in the purchase recommendation should explain why you chose this list of stocks, how confident you are and what factors you considered.

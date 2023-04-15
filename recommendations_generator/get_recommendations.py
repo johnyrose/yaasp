@@ -3,6 +3,7 @@ from typing import List
 
 from common.logger import logger
 from common.openai_adapter import get_openai_response
+from common.shorten_report import get_shortened_stock_symbol_report
 from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
 from openai_prompts import GET_STOCK_RECOMMENDATION
 from recommendations_generator.models import RiskPreference, PurchaseRecommendation
@@ -19,6 +20,8 @@ def get_recommendations(stock_reports: List[StockSymbolReport], current_situatio
     """
     logger.info(f"Getting recommendations for provided stock reports.")
     retry_amount = 4
+    stock_reports = [get_shortened_stock_symbol_report(stock_report) for stock_report in stock_reports]
+    # TODO - Remove this when the stock reports are written shorter in the first place
     for i in range(retry_amount):
         try:
             prompt = GET_STOCK_RECOMMENDATION.format(stock_reports=stock_reports, current_situation=current_situation,
