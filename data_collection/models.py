@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from pydantic import BaseModel
 
@@ -45,4 +45,4 @@ class CompanyStockInfo(BaseModel):
     dividend: float
     dividend_yield: float
     ex_dividend_date: str
-    company_earnings: List[Dict]
+    company_earnings: Optional[List[Dict]]

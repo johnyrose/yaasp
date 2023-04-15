@@ -1,7 +1,8 @@
 import finnhub
 import yfinance as yf
 
-from config import FINHUB_API_KEY
+from common.logger import logger
+from config import FINNHUB_API_KEY
 from data_collection.models import CompanyStockInfo
 
 
@@ -15,8 +16,12 @@ def get_stock_info(company_symbol: str) -> CompanyStockInfo:
     ticker = yf.Ticker(company_symbol)
     info = ticker.info
 
-    finnhub_client = finnhub.Client(api_key=FINHUB_API_KEY)
-    company_earnings = finnhub_client.company_earnings(symbol=company_symbol)
+    try:
+        finnhub_client = finnhub.Client(api_key=FINNHUB_API_KEY)
+        company_earnings = finnhub_client.company_earnings(symbol=company_symbol)
+    except Exception as e:
+        logger.warning(f"Failed to get earnings for {company_symbol} - {e}. The stock info won't include it.")
+        company_earnings = None
 
     return CompanyStockInfo(
         industry=info.get('industry', ''),
