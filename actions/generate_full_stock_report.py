@@ -12,6 +12,7 @@ from stock_analysis.stock_symbol_report_generator import generate_stock_symbol_r
 
 def get_stock_news(stock_symbol: str, days_ago_news: Optional[int]) -> List[NewsArticle]:
     company_name = get_company_name_from_symbol(stock_symbol)
+    # TODO - If the stock symbol is an index, handle it accordingly and don't lookup a company name.
     start_date = None
     if days_ago_news:
         end_date = datetime.date.today()
