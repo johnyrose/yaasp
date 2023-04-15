@@ -1,6 +1,6 @@
 import json
 
-from data_collection.company_stock_data_collector import get_stock_info
+from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info
 from data_collection.news_collection.marketaux_collector import MarketauxNewsCollector
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 from stock_analysis.models import StockSymbolReport

@@ -2,3 +2,4 @@ yfinance
 openai
 newsapi-python
 pydantic
+finnhub-python
