@@ -6,7 +6,7 @@ from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
 from data_collection.models import NewsArticle
 from openai_prompts import GET_ARTICLE_SUMMARY_PROMPT, GET_ARTICLE_NEWS_REPORT
 from stock_analysis.models import StockNewsReport, ArticleSummary
-from stock_analysis.openai_adapter import get_openai_response
+from common.openai_adapter import get_openai_response
 
 
 def get_articles_summaries(company_symbol: str, news_articles: List[NewsArticle]) -> List[ArticleSummary]:

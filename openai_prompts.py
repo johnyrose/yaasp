@@ -94,3 +94,44 @@ When writing the confidence explanation, explain why you chose the confidence le
 Your response will contain the JSON and nothing else. The JSON must be valid.
  
 """
+
+GET_STOCK_RECOMMENDATION = """
+You are now a financial expert and you will help me decide which stocks to buy. I will provide you with my current
+situation which should include my current portfolio, risk preference and any other relevant information. 
+I will also provide you with some reports I generated for stocks that I am considering buying. 
+You will analyze the reports and provide me with your recommendation. 
+
+The risk preference can be: RISKY, MODERATE, SAFE
+
+Here are some reports on stocks I consider buying:
+
+{stock_reports}
+
+Here is my current situation:
+
+{current_situation}
+
+My risk preference is: {risk_preference}
+
+Here are some relevant objects:
+
+class StockRecommendation(BaseModel):
+    symbol: str
+    target_price: float
+    position: str
+    amount: int
+    explanation: str
+
+
+class PurchaseRecommendation(BaseModel):
+    stock_recommendations: List[StockRecommendation]
+    explanation: str
+    confidence_level: int  # A number from 1 to 10, 10 being the highest confidence level. 
+    # This is how confident the model is in its recommendation.
+    
+Your response will be a JSON that firs the PurchaseRecommendation model. The JSON must be valid. In each stock recommendation
+you will provide an explanation for your recommendation and consider all the parameters mentioned below.
+
+The explanation in the purchase recommendation should explain why you chose this list of stocks, how confident you are and what factors you considered.
+
+"""

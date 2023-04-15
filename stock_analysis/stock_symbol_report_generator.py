@@ -7,7 +7,7 @@ from openai_prompts import GET_FULL_STOCK_REPORT
 from stock_analysis.models import StockNewsReport, StockSymbolReport
 from datetime import datetime
 
-from stock_analysis.openai_adapter import get_openai_response
+from common.openai_adapter import get_openai_response
 
 
 def generate_stock_symbol_report(stock_symbol: str, news_report: StockNewsReport,
