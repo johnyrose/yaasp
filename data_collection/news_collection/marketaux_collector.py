@@ -1,8 +1,6 @@
-import os
 import requests
-import yfinance as yf
 from datetime import datetime, timedelta
-from typing import List
+from typing import List, Optional
 
 from config import MARKETAUX_API_KEY
 from data_collection.models import NewsArticle
@@ -16,8 +14,12 @@ class MarketauxNewsCollector(NewsCollectorBase):
         super().__init__(query)
         self.api_key = MARKETAUX_API_KEY
 
-    def get_news_articles(self, num_articles: int = 5, *args, **kwargs) -> List[NewsArticle]:
+    def get_news_articles(self, num_articles: int = 5, start_date: Optional[datetime] = None,
+                          *args, **kwargs) -> List[NewsArticle]:
         published_after = (datetime.utcnow() - timedelta(days=200)).strftime('%Y-%m-%dT%H:%M')
+
+        if start_date:
+            published_after = start_date.strftime('%Y-%m-%dT%H:%M')
 
         params = {
             'filter_entities': 'true',

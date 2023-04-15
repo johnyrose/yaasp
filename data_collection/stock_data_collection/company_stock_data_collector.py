@@ -3,6 +3,12 @@ import yfinance as yf
 from data_collection.models import CompanyStockInfo
 
 
+def get_company_name_from_symbol(company_symbol: str) -> str:
+    ticker_info = yf.Ticker(company_symbol).info
+    company_name = ticker_info['longName']
+    return company_name
+
+
 def get_stock_info(company_symbol: str) -> CompanyStockInfo:
     ticker = yf.Ticker(company_symbol)
     info = ticker.info
