@@ -7,7 +7,7 @@ from recommendations_generator.models import RiskPreference
 from stock_analysis.models import StockSymbolReport
 
 if __name__ == '__main__':
-    # symbols = ["MSFT", "GOOG", "VOO", "INTC", "AMD", "EA"]
+    # symbols = ["MSFT", "GOOG", "VOO", "INTC", "AMD", "EA", "ATVI", "SONY"]
     # for symbol in symbols:
     #     try:
     #         report = generate_stock_report(symbol)
@@ -18,7 +18,6 @@ if __name__ == '__main__':
     #         print(f'Failed to generate report for {symbol} with error: {e}')
     files = os.listdir()
     json_files = [f for f in files if f.startswith('stock_report') and f.endswith('.json')]
-
     stock_reports = []
     for file in json_files:
         with open(file, 'r') as f:
