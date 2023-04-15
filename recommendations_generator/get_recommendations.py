@@ -17,6 +17,7 @@ def get_recommendations(stock_reports: List[StockSymbolReport], current_situatio
     :param current_situation: The current situation of the user, represented by free text at the moment.
     :param risk_preference: The risk preference of the user
     """
+    logger.info(f"Getting recommendations for provided stock reports.")
     retry_amount = 4
     for i in range(retry_amount):
         try:
@@ -24,6 +25,7 @@ def get_recommendations(stock_reports: List[StockSymbolReport], current_situatio
                                                      risk_preference=risk_preference)
             response = get_openai_response(prompt, model_type=OPENAI_MODEL_FOR_COMPLICATED_TASKS)
             response_json = json.loads(response)
+            logger.info(f"Got recommendations for stock reports. Recommendations: {response_json}")
             return PurchaseRecommendation(**response_json)
         except Exception as e:
             logger.error(f"Failed to get recommendations for stock reports: {stock_reports}. Error: {e}. Retrying...")
