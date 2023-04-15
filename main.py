@@ -12,8 +12,8 @@ from recommendations_generator.models import RiskPreference
 from stock_analysis.models import StockSymbolReport
 
 
-if __name__ == '__main__':
-    get_stock_info('MSFT')
+# if __name__ == '__main__':
+#     get_stock_info('MSFT')
 
 if __name__ == '__main__':
     symbols = ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL"]

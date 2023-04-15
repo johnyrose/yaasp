@@ -5,7 +5,7 @@ from data_collection.models import NewsArticle
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info, \
     get_company_name_from_symbol
-from export.export_reports_to_json import export_purchase_recommendation
+from export.export_reports_to_json import export_purchase_recommendation, export_stock_symbol_report
 from stock_analysis.models import StockSymbolReport
 from stock_analysis.news_report_generator import generate_news_report
 from stock_analysis.stock_symbol_report_generator import generate_stock_symbol_report
@@ -33,4 +33,5 @@ def generate_stock_report(stock_symbol: str, days_ago_news: Optional[int] = None
     stock_report = generate_news_report(stock_symbol, stock_news)
     stock_info = get_stock_info(stock_symbol)
     full_report = generate_stock_symbol_report(stock_symbol, stock_report, stock_info)
+    export_stock_symbol_report(full_report)
     return full_report
