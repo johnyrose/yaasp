@@ -1,5 +1,7 @@
+import finnhub
 import yfinance as yf
 
+from config import FINHUB_API_KEY
 from data_collection.models import CompanyStockInfo
 
 
@@ -12,9 +14,14 @@ def get_company_name_from_symbol(company_symbol: str) -> str:
 def get_stock_info(company_symbol: str) -> CompanyStockInfo:
     ticker = yf.Ticker(company_symbol)
     info = ticker.info
+
+    finnhub_client = finnhub.Client(api_key=FINHUB_API_KEY)
+    company_earnings = finnhub_client.company_earnings(symbol=company_symbol)
+
     return CompanyStockInfo(
         industry=info.get('industry', ''),
         sector=info.get('sector', ''),
+        company_earnings=company_earnings,
         fullTimeEmployees=info.get('fullTimeEmployees', 0),
         previousClose=info.get('regularMarketPreviousClose', 0),
         open=info.get('regularMarketOpen', 0),

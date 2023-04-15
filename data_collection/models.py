@@ -1,3 +1,5 @@
+from typing import List, Dict
+
 from pydantic import BaseModel
 
 
@@ -43,3 +45,4 @@ class CompanyStockInfo(BaseModel):
     dividend: float
     dividend_yield: float
     ex_dividend_date: str
+    company_earnings: List[Dict]
