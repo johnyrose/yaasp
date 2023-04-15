@@ -9,7 +9,25 @@ class NewsArticle(BaseModel):
 
 
 class CompanyStockInfo(BaseModel):
+    industry: str
+    sector: str
+    fullTimeEmployees: int
+    previousClose: float
+    open: float
+    dayLow: float
+    dayHigh: float
+    regularMarketVolume: int
+    marketCap: int
+    fiftyTwoWeekLow: float
+    fiftyTwoWeekHigh: float
+    twoHundredDayAverage: float
+    trailingAnnualDividendYield: float
+    sharesShort: int
+    heldPercentInstitutions: float
+    pegRatio: float
+    exchange: str
     symbol: str
+    underlyingSymbol: str
     description: str
     bid: float
     ask: float
@@ -19,11 +37,9 @@ class CompanyStockInfo(BaseModel):
     fifty_two_week_range: str
     volume: int
     avg_volume: int
-    market_cap: int
     pe_ratio: float
     eps: float
     earnings_date: str
     dividend: float
     dividend_yield: float
     ex_dividend_date: str
-    one_year_target_estimate: float

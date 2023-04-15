@@ -3,6 +3,8 @@ from typing import Dict, List
 from pydantic import BaseModel
 import enum
 
+from data_collection.models import CompanyStockInfo
+
 
 class OpenAIModelType(enum.Enum):
     GPT_35_TURBO = "gpt-3.5-turbo"
@@ -46,7 +48,7 @@ class StockNewsReport(BaseModel):
 class StockSymbolReport(BaseModel):
     stock_symbol: str
     news_report: StockNewsReport  # The news report for the stock symbol
-    data: Dict  # The data for the stock symbol
+    data: CompanyStockInfo  # The data for the stock symbol
     stock_recommendation: StockRecommendation  # The recommendation for the stock
     stock_recommendation_reason: str  # The reason for the stock recommendation
     position_recommendation: PositionRecommendation  # The recommendation for the position

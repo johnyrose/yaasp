@@ -3,6 +3,7 @@ from typing import Dict
 
 from common.logger import logger
 from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
+from data_collection.models import CompanyStockInfo
 from openai_prompts import GET_FULL_STOCK_REPORT
 from stock_analysis.models import StockNewsReport, StockSymbolReport
 from datetime import datetime
@@ -11,7 +12,7 @@ from common.openai_adapter import get_openai_response
 
 
 def generate_stock_symbol_report(stock_symbol: str, news_report: StockNewsReport,
-                                 stock_data: Dict) -> StockSymbolReport:
+                                 stock_data: CompanyStockInfo) -> StockSymbolReport:
     logger.info(f"Generating stock symbol report for {stock_symbol}...")
     prompt = GET_FULL_STOCK_REPORT.format(
         date=datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
