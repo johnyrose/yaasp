@@ -15,7 +15,7 @@ def generate_stock_symbol_report(stock_symbol: str, news_report: StockNewsReport
                                  stock_data: CompanyStockInfo) -> StockSymbolReport:
     logger.info(f"Generating stock symbol report for {stock_symbol}...")
     prompt = GET_FULL_STOCK_REPORT.format(
-        date=datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+        date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         stock_symbol=stock_symbol,
         stock_info=stock_data,
         news_summary=news_report.news_summary

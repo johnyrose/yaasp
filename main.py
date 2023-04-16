@@ -3,9 +3,11 @@ import json
 import os
 from actions.generate_full_stock_report import generate_stock_report
 from common.shorten_report import get_shortened_stock_symbol_report
+from config import MAX_REPORTS_FOR_RECOMMENDATIONS
 from data_collection.news_collection.marketaux_collector import MarketauxNewsCollector
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info
+from export.export_purchase_recommendation_to_pdf import export_purchase_recommendation_to_pdf
 from export.export_stock_report_to_pdf import export_stock_report_to_pdf
 from recommendations_generator.get_recommendations import get_recommendations
 from recommendations_generator.models import RiskPreference
@@ -16,19 +18,16 @@ from stock_analysis.models import StockSymbolReport
 #     get_stock_info('MSFT')
 
 if __name__ == '__main__':
-    symbols = ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL"]
-    stock_reports = []
-    for symbol in symbols:
-        try:
-            report = generate_stock_report(symbol, days_ago_news=3)
-            stock_reports.append(report)
-        except Exception as e:
-            print(f'Failed to generate report for {symbol} with error: {e}')
-    files = os.listdir()
-    json_files = [f for f in files if f.startswith('stock_report') and f.endswith('.json')]
-
-    for report in stock_reports:
-        export_stock_report_to_pdf(report, f'{report.stock_symbol}_report.pdf')
+    symbols = ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL", "UPS", "KOL", "NVDA", "ABR", "PTPI", "PARA"]
+    # stock_reports = []
+    # for symbol in symbols:
+    #     try:
+    #         report = generate_stock_report(symbol, days_ago_news=3)
+    #         stock_reports.append(report)
+    #     except Exception as e:
+    #         print(f'Failed to generate report for {symbol} with error: {e}')
+    files = os.listdir('exports/stock_symbol_reports')
+    stock_reports = [StockSymbolReport(**json.load(open(f'exports/stock_symbol_reports/{f}'))) for f in files]
 
     current_situation = """
     Here is my current portfolio CSV:
@@ -42,10 +41,11 @@ if __name__ == '__main__':
     "NVDA","NVIDIA CORP","4","264.63","-36.94","273.865","2023-04-13"
     "VOO","VANGUARD S&P 500 ETF","24","379.77","85.048","376.226333333","2023-04-13"
 
-    I like technology and video games. I have about 4000 USD I want to invest. I want to invest for the short term to make a quick profit, not the long term.
+    I like technology and video games. I have about 4000 USD I want to invest. I want to invest for the short term to make a quick profit, not the long term. Make sure to make it diverse, I want 4-5 companies
     """
 
+    stock_reports = stock_reports[:MAX_REPORTS_FOR_RECOMMENDATIONS]
     recs = get_recommendations(stock_reports, current_situation, RiskPreference.RISKY)
+    export_purchase_recommendation_to_pdf(recs, 'recommendation.pdf')
     print(recs.dict())
-    with open('recommendations.json', 'w') as f:
-        f.write(json.dumps(recs.dict(), indent=4))
+

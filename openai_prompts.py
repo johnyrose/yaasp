@@ -132,6 +132,8 @@ class PurchaseRecommendation(BaseModel):
 Your response will be a JSON that fits the PurchaseRecommendation model. The JSON must be valid. In each stock recommendation
 you will provide an explanation for your recommendation and consider all the parameters mentioned below.
 
+You may ONLY suggest stocks that are in the stock reports you received. You may NOT suggest stocks that are not in the stock reports.
+
 The explanation in the purchase recommendation should explain why you chose this list of stocks, how confident you are and what factors you considered.
 
 """
