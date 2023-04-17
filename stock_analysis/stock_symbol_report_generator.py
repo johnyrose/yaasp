@@ -1,10 +1,9 @@
 import json
-from typing import Dict
 
 from common.logger import logger
 from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
 from data_collection.models import CompanyStockInfo
-from openai_prompts import GET_FULL_STOCK_REPORT
+from common.openai_prompts import GET_FULL_STOCK_REPORT
 from stock_analysis.models import StockNewsReport, StockSymbolReport
 from datetime import datetime
 

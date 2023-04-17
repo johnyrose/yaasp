@@ -6,7 +6,7 @@ from common.openai_adapter import get_openai_response
 from common.shorten_report import get_shortened_stock_symbol_report
 from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
 from export.export_reports_to_json import export_purchase_recommendation
-from openai_prompts import GET_STOCK_RECOMMENDATION
+from common.openai_prompts import GET_STOCK_RECOMMENDATION
 from recommendations_generator.models import RiskPreference, PurchaseRecommendation
 from stock_analysis.models import StockSymbolReport
 

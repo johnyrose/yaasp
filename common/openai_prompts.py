@@ -137,3 +137,17 @@ You may ONLY suggest stocks that are in the stock reports you received. You may 
 The explanation in the purchase recommendation should explain why you chose this list of stocks, how confident you are and what factors you considered.
 
 """
+
+GET_TRENDING_STOCKS = """
+You are now a financial expert and you will help me find trending stocks. I will provide you with a few news articles 
+relevant to today's date. You will analyze the articles and provide me with a list of trending in the market. 
+
+Here are the articles:
+{articles}
+
+Your response will be a JSON List of strings, each string being a stock symbol. The JSON must be valid. For example:
+
+["AAPL", "TSLA", "GOOG"]
+
+The response should contain only the JSON and nothing else.
+"""

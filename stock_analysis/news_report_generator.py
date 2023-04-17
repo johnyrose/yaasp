@@ -4,7 +4,7 @@ from typing import List
 from common.logger import logger
 from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
 from data_collection.models import NewsArticle
-from openai_prompts import GET_ARTICLE_SUMMARY_PROMPT, GET_ARTICLE_NEWS_REPORT
+from common.openai_prompts import GET_ARTICLE_SUMMARY_PROMPT, GET_ARTICLE_NEWS_REPORT
 from stock_analysis.models import StockNewsReport, ArticleSummary
 from common.openai_adapter import get_openai_response
 
