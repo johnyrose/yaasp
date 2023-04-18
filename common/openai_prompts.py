@@ -82,12 +82,63 @@ You will analyze the provided information about the stock symbol and make your r
     position_recommendation_reason: str  # The reason for the position recommendation
     confidence_level: int  # A number from 1 to 10, 10 being the highest confidence level. This is how confident the model is in its recommendation.
     confidence_explanation: str  # An explanation of the confidence level
+    stock_score: int  # A number from 1 to 10, 10 being the highest score. Essentially gives the stock itself a score.
 
 When writing the confidence level, consider the following:
  - The date / relevance of the data
  - The relation of the data to the stock symbol, especially the news
  - The quality of the data
  - How much the data can actually contribute to choosing whether to buy the stock or not.
+ 
+To calculate the stock_score for any given stock report, you should consider various parameters that contribute to the score in the stock's performance and potential for growth. Each parameter can be assigned a weight based on its importance in determining the overall confidence level. Here's a suggested approach to calculate the confidence_level:
+
+Parameters:
+
+* Acquisition or major partnership (Weight: 0.3): Consider any recent acquisition, merger, or major partnership that could impact the company's growth and position in the industry.
+
+* Financial performance (Weight: 0.25): Analyze the company's recent financial performance, including revenue growth, earnings per share (EPS), and profit margins.
+
+* Legal challenges (Weight: 0.15): Assess the impact of any ongoing legal challenges, including lawsuits and regulatory issues, on the company's operations and reputation.
+
+* Industry outlook (Weight: 0.1): Consider the overall outlook for the industry in which the company operates, including market trends, competition, and potential growth opportunities.
+
+* Analyst recommendations (Weight: 0.1): Take into account the recommendations provided by financial analysts, such as "buy," "hold," or "sell" ratings.
+
+* Stock price and volatility (Weight: 0.1): Analyze the stock's recent price history, including any significant fluctuations and trends, as well as its historical volatility.
+
+Instructions to calculate confidence_level:
+
+* Evaluate each parameter on a scale of 0 (lowest confidence) to 1 (highest confidence), based on the information available in the stock report.
+
+* Multiply each parameter's score by its respective weight.
+
+* Sum the weighted scores to obtain the total confidence_level score.
+
+* Normalize the confidence_level score by dividing it by the sum of the weights, ensuring that it falls between 0 and 1.
+
+Example:
+
+Suppose we have the following scores for each parameter:
+
+Acquisition or major partnership: 0.9
+Financial performance: 0.7
+Legal challenges: 0.4
+Industry outlook: 0.8
+Analyst recommendations: 0.6
+Stock price and volatility: 0.5
+Weighted scores:
+
+Acquisition or major partnership: 0.9 * 0.3 = 0.27
+Financial performance: 0.7 * 0.25 = 0.175
+Legal challenges: 0.4 * 0.15 = 0.06
+Industry outlook: 0.8 * 0.1 = 0.08
+Analyst recommendations: 0.6 * 0.1 = 0.06
+Stock price and volatility: 0.5 * 0.1 = 0.05
+Sum of weighted scores: 0.27 + 0.175 + 0.06 + 0.08 + 0.06 + 0.05 = 0.695
+
+Normalized confidence_level: 0.695 / (0.3 + 0.25 + 0.15 + 0.1 + 0.1 + 0.1) = 0.695
+
+In this example, the stock_score for the given stock report would be 0.695.
  
 When writing the confidence explanation, explain why you chose the confidence level you chose, and consider the parameters mentioned above. If something lowered your confidence, explain what it was and what suggestions you have to provide better information.
 

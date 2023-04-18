@@ -26,6 +26,10 @@ def get_stock_news(stock_symbol: str, days_ago_news: int = 5) -> List[NewsArticl
     return articles
 
 
+def perform_self_reflexion(current_report: StockSymbolReport) -> None:
+    pass
+
+
 def generate_stock_report(stock_symbol: str, days_ago_news: Optional[int] = None) -> StockSymbolReport:
     stock_news = get_stock_news(stock_symbol, days_ago_news)
     # marketaux_articles = MarketauxNewsCollector(stock_symbol).get_news_articles(start_date=start_date)

@@ -55,4 +55,5 @@ class StockSymbolReport(BaseModel):
     position_recommendation_reason: str  # The reason for the position recommendation
     confidence_level: int  # A number from 1 to 10, 10 being the highest confidence level. This is how confident the
     # model is in its recommendation.
+    stock_score: int  # A number from 1 to 10, 10 being the highest score. Essentially gives the stock itself a score.
     confidence_explanation: str  # An explanation of the confidence level

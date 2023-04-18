@@ -1,3 +1,4 @@
+import concurrent.futures
 import datetime
 import json
 import os
@@ -23,18 +24,29 @@ from stock_analysis.models import StockSymbolReport
     # print(s)
     # d = find_stocks('DOW 30')
     # print(d)
-
 if __name__ == '__main__':
-    symbols = ['PINS', 'ABNB', 'ET']
-    stock_reports = []
-    for symbol in symbols:
-        try:
-            report = generate_stock_report(symbol, days_ago_news=3)
-            stock_reports.append(report)
-        except Exception as e:
-            print(f'Failed to generate report for {symbol} with error: {e}')
-    files = os.listdir('exports/stock_symbol_reports')
-    stock_reports = [StockSymbolReport(**json.load(open(f'exports/stock_symbol_reports/{f}'))) for f in files]
+
+    def get_report(symbol):
+        report = generate_stock_report(symbol, days_ago_news=3)
+
+    symbols = ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL", "NVDA", "BBBY"]
+    # Create a ThreadPoolExecutor and run the threads
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
+        # Start the threads by calling my_function for each value
+        futures = [executor.submit(get_report, value) for value in symbols]
+
+        # Wait for all threads to complete and collect the results
+        results = [future.result() for future in concurrent.futures.as_completed(futures)]
+
+    # stock_reports = []
+    # for symbol in symbols:
+    #     try:
+    #         report = generate_stock_report(symbol, days_ago_news=3)
+    #         stock_reports.append(report)
+    #     except Exception as e:
+    #         print(f'Failed to generate report for {symbol} with error: {e}')
+    # files = os.listdir('exports/stock_symbol_reports')
+    # stock_reports = [StockSymbolReport(**json.load(open(f'exports/stock_symbol_reports/{f}'))) for f in files]
 
     current_situation = """
     Here is my current portfolio CSV:
@@ -51,8 +63,8 @@ if __name__ == '__main__':
     I like technology and video games. I have about 4000 USD I want to invest. I want to invest for the short term to make a quick profit, not the long term. Make sure to make it diverse, I want 4-5 companies
     """
 
-    stock_reports = stock_reports[:MAX_REPORTS_FOR_RECOMMENDATIONS]
-    recs = get_recommendations(stock_reports, current_situation, RiskPreference.RISKY)
-    export_purchase_recommendation_to_pdf(recs, 'recommendation.pdf')
-    print(recs.dict())
+    # stock_reports = stock_reports[:MAX_REPORTS_FOR_RECOMMENDATIONS]
+    # recs = get_recommendations(stock_reports, current_situation, RiskPreference.RISKY)
+    # export_purchase_recommendation_to_pdf(recs, 'recommendation.pdf')
+    # print(recs.dict())
 
