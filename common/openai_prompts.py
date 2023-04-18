@@ -202,3 +202,16 @@ Your response will be a JSON List of strings, each string being a stock symbol. 
 
 The response should contain only the JSON and nothing else.
 """
+
+
+GET_SEARCH_TERMS_FOR_SELF_REFLEXION = """
+You are now a financial expert and you will help me find trending stocks.
+
+Here are suggestions that were provided to improve the confidence level of a stock report:
+{confidence_level_suggestions}
+
+You will respond with a JSON list with search queries for news that can improve the stock's confidence level. The search terms will be short and to the point, no more than 4 words each.
+The JSON must be valid
+For example:
+["Microsoft latest acquisition"] 
+"""
