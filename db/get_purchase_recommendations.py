@@ -8,7 +8,12 @@ from common.models.db_objects import PurchaseRecommendationDB
 from common.models.recommendations import PurchaseRecommendation
 
 
-def get_most_recent_purchase_recommendations() -> List[PurchaseRecommendation]:
+def get_all_purchase_recommendations() -> List[PurchaseRecommendation]:
+    purchase_recommendations_db = session_object.query(PurchaseRecommendationDB).all()
+    return [from_sqlalchemy(recommendation_db) for recommendation_db in purchase_recommendations_db]
+
+
+def get_most_recent_purchase_recommendation() -> PurchaseRecommendation:
     most_recent_recommendations_subquery = (
         session_object.query(
             PurchaseRecommendationDB.stock_recommendations,
@@ -31,4 +36,4 @@ def get_most_recent_purchase_recommendations() -> List[PurchaseRecommendation]:
         .all()
     )
 
-    return [from_sqlalchemy(report_db) for report_db in most_recent_recommendations_db]
+    return next(from_sqlalchemy(report_db) for report_db in most_recent_recommendations_db)

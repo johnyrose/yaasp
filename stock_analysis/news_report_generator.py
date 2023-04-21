@@ -3,7 +3,7 @@ from typing import List
 
 from common.db_utils import save_to_db
 from common.logger import logger
-from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
+from config import OPENAI_MODEL_FOR_SIMPLE_TASKS, OPENAI_MODEL_FOR_COMPLICATED_TASKS
 from common.models.data_collection import NewsArticle
 from common.openai_prompts import GET_ARTICLE_SUMMARY_PROMPT, GET_ARTICLE_NEWS_REPORT
 from common.models.stock_analysis import StockNewsReport, ArticleSummary
@@ -30,7 +30,7 @@ def _get_news_report(stock_symbol: str, article_summaries: List[ArticleSummary])
     retry_count = 4  # TODO - Make this configurable
     for i in range(retry_count):
         try:
-            openai_response = get_openai_response(prompt=prompt, model_type=OPENAI_MODEL_FOR_SIMPLE_TASKS)
+            openai_response = get_openai_response(prompt=prompt, model_type=OPENAI_MODEL_FOR_COMPLICATED_TASKS)
             response_json = json.loads(openai_response)
             stock_news_report = StockNewsReport(**response_json)
             return stock_news_report

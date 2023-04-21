@@ -4,12 +4,13 @@ from typing import List
 from sqlalchemy import desc, func
 
 from actions.generate_full_stock_report import generate_stock_report
+from actions.search_trending_stocks import search_trending_stocks
 from common.db_connection import session_object
 from common.db_utils import from_sqlalchemy
 from common.models.db_objects import StockSymbolReportDB, PurchaseRecommendationDB
 from common.models.recommendations import RiskPreference, PurchaseRecommendation
 from common.models.stock_analysis import StockSymbolReport
-from db.get_purchase_recommendations import get_most_recent_purchase_recommendations
+from db.get_purchase_recommendations import get_most_recent_purchase_recommendation, get_all_purchase_recommendations
 
 
 def get_all_stock_symbol_reports() -> List[StockSymbolReport]:
@@ -17,19 +18,22 @@ def get_all_stock_symbol_reports() -> List[StockSymbolReport]:
     return [from_sqlalchemy(report_db) for report_db in stock_symbol_reports_db]
 
 
-if __name__ == '__main__':
-    res = get_most_recent_purchase_recommendations()
-    print(res)
 # if __name__ == '__main__':
-#
-#     # def get_report(symbol):
-#     #     report = generate_stock_report(symbol, days_ago_news=3, attempt_self_reflexion=False)
-#     #
-#     # symbols = ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL", "NVDA", "BBBY"]
-#     # symbols = ["MSFT", "GOOGL", "EA", "AMD", "TSLA", "BBBY"]
-#     # with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-#     #     futures = [executor.submit(get_report, value) for value in symbols]
-#     #     results = [future.result() for future in concurrent.futures.as_completed(futures)]
+#     res = get_all_purchase_recommendations()
+#     print(res)
+if __name__ == '__main__':
+    symbols = search_trending_stocks()
+    print(symbols)
+
+    def get_report(symbol):
+        report = generate_stock_report(symbol, days_ago_news=3, attempt_self_reflexion=False)
+
+    symbols += ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL", "NVDA", "BBBY"]
+    # symbols = ["MSFT", "GOOGL", "EA", "AMD", "TSLA", "BBBY"]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(get_report, value) for value in symbols]
+        results = [future.result() for future in concurrent.futures.as_completed(futures)]
+
 #     # print(results)
 #     # files = os.listdir('exports/stock_symbol_reports')
 #     stock_reports = get_most_recent_stock_symbol_reports()
