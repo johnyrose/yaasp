@@ -25,13 +25,14 @@ def export_json_to_file(json_data: BaseModel, file_path: str) -> None:
         json.dump(json_data.dict(), outfile, indent=4)
 
 
-def export_stock_symbol_report(report: StockSymbolReport) -> None:
+def export_stock_symbol_report(report: StockSymbolReport) -> str:
     logger.info(f"Exporting stock symbol report for {report.stock_symbol} to JSON.")
     create_directory_if_not_exists(STOCK_SYMBOL_JSON_REPORTS_DIRECTORY)
     filename = generate_filename(f"StockSymbolReport_{report.stock_symbol}")
     file_path = Path(STOCK_SYMBOL_JSON_REPORTS_DIRECTORY) / filename
     export_json_to_file(report, file_path)
     logger.info(f"Exported stock symbol report for {report.stock_symbol} to JSON.")
+    return file_path
 
 
 def export_purchase_recommendation(recommendation: PurchaseRecommendation) -> None:

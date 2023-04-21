@@ -48,8 +48,8 @@ def perform_self_reflexion(current_report: StockSymbolReport, current_news_artic
     return new_full_report
 
 
-def generate_stock_report(stock_symbol: str, days_ago_news: int = 5,
-                          attempt_self_reflexion: bool = True) -> StockSymbolReport:
+def generate_full_stock_report(stock_symbol: str, days_ago_news: int = 5,
+                               attempt_self_reflexion: bool = True) -> StockSymbolReport:
     stock_news = get_stock_news(stock_symbol, days_ago_news)
     # marketaux_articles = MarketauxNewsCollector(stock_symbol).get_news_articles(start_date=start_date)
     stock_report = generate_news_report(stock_symbol, stock_news)

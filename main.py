@@ -1,64 +1,75 @@
 import concurrent.futures
 from typing import List
 
-from sqlalchemy import desc, func
+import typer
+from rich.console import Console
 
-from actions.generate_full_stock_report import generate_stock_report
-from actions.search_trending_stocks import search_trending_stocks
-from common.db_connection import session_object
-from common.db_utils import from_sqlalchemy
-from common.models.db_objects import StockSymbolReportDB, PurchaseRecommendationDB
-from common.models.recommendations import RiskPreference, PurchaseRecommendation
+from actions.generate_full_stock_report import generate_full_stock_report
 from common.models.stock_analysis import StockSymbolReport
-from config import MAX_REPORTS_FOR_RECOMMENDATIONS
-from db.get_purchase_recommendations import get_most_recent_purchase_recommendation, get_all_purchase_recommendations
-from db.get_stock_symbol_reports import get_most_recent_stock_symbol_reports
-from export.export_purchase_recommendation_to_pdf import export_purchase_recommendation_to_pdf
-from recommendations_generator.get_recommendations import get_recommendations
+from config import MAX_REPORT_FETCHING_THREADS
+from export.export_reports_to_json import export_stock_symbol_report
+
+app = typer.Typer()
+console = Console()
 
 
-def get_all_stock_symbol_reports() -> List[StockSymbolReport]:
-    stock_symbol_reports_db = session_object.query(StockSymbolReportDB).all()
-    return [from_sqlalchemy(report_db) for report_db in stock_symbol_reports_db]
+@app.command()
+def generate_stock_report(
+        symbols: str = typer.Option(..., help="List of stock symbols separated by commas, like msft,aapl,amzn"),
+        days_ago_news: int = typer.Option(5, help="Number of days ago to fetch news"),
+        attempt_self_reflexion: bool = typer.Option(True, help="Attempt self reflexion for the report"),
+        export_pdf: bool = typer.Option(False, help="Export the generated reports as PDF")):
+
+    def get_report(stock_symbol: str) -> StockSymbolReport:
+        # try:
+            return generate_full_stock_report(stock_symbol, days_ago_news=days_ago_news,
+                                              attempt_self_reflexion=attempt_self_reflexion)
+        # except Exception as e:
+        #     console.print(f"Error generating stock report for symbol: {stock_symbol}, error: {e}")
+        #     return None
+
+    symbols_list = symbols.split(",")
+    # Upper case all symbols
+    symbols_list = [symbol.upper().strip() for symbol in symbols_list]
+    print(symbols_list)
+
+    console.print(f"Generating stock reports for symbols: {', '.join(symbols_list)}")
+    exported_files = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_REPORT_FETCHING_THREADS) as executor:
+        futures = [executor.submit(get_report, value) for value in symbols_list]
+        results = [future.result() for future in concurrent.futures.as_completed(futures)]
+        console.print(f"Finished Generating stock reports for symbols: {', '.join(symbols_list)}")
+
+        if export_pdf:
+            for result in results:
+                exported_files.append(export_stock_symbol_report(result))
+    if exported_files:
+        console.print(f"Exported stock reports to files: {exported_files}")
 
 
-# if __name__ == '__main__':
-#     res = get_all_purchase_recommendations()
-#     print(res)
-if __name__ == '__main__':
-    # symbols = search_trending_stocks()
-    # print(symbols)
-    #
-    # def get_report(symbol):
-    #     report = generate_stock_report(symbol, days_ago_news=3, attempt_self_reflexion=False)
-    #
-    # symbols += ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL", "NVDA", "BBBY"]
-    # # symbols = ["MSFT", "GOOGL", "EA", "AMD", "TSLA", "BBBY"]
-    # with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-    #     futures = [executor.submit(get_report, value) for value in symbols]
-    #     results = [future.result() for future in concurrent.futures.as_completed(futures)]
+@app.command()
+def get_stock_report(search_by: str = "", latest: bool = False):
+    console.print(f"Getting stock report with search_by: {search_by}, latest: {latest}")
+    # Implement your get stock report logic here
 
-#     # print(results)
-#     # files = os.listdir('exports/stock_symbol_reports')
-    stock_reports = get_most_recent_stock_symbol_reports()
 
-    current_situation = """
-    Here is my current portfolio CSV:
-    "Symbol","Description","Quantity","MarkPrice","FifoPnlUnrealized","OpenPrice","ReportDate"
-    "AAPL","APPLE INC","1","165.56","-1.22","166.78","2023-04-13"
-    "AMD","ADVANCED MICRO DEVICES","5","92.09","-10.9","94.27","2023-04-13"
-    "BBBY","BED BATH & BEYOND INC","102","0.2565","-13.334699","0.387202941","2023-04-13"
-    "GOOGL","ALPHABET INC-CL A","3","107.43","6.11","105.393333333","2023-04-13"
-    "INTC","INTEL CORP","10","32.13","-10.85","33.215","2023-04-13"
-    "MSFT","MICROSOFT CORP","2","289.84","6.48","286.6","2023-04-13"
-    "NVDA","NVIDIA CORP","4","264.63","-36.94","273.865","2023-04-13"
-    "VOO","VANGUARD S&P 500 ETF","24","379.77","85.048","376.226333333","2023-04-13"
+@app.command()
+def generate_recommendations():
+    console.print("Generating recommendations")
+    # Implement your recommendations generation logic here
 
-    I like technology and video games. I have about 4000 USD I want to invest. I want to invest for the short term to make a quick profit, not the long term. Make sure to make it diverse, I want 4-5 companies
-    """
 
-    stock_reports = stock_reports[:MAX_REPORTS_FOR_RECOMMENDATIONS]
-    recs = get_recommendations(stock_reports, current_situation, RiskPreference.RISKY)
-    export_purchase_recommendation_to_pdf(recs, 'recommendation.pdf')
-    print(recs.dict())
+@app.command()
+def export_stock_report(symbols: str, output_format: str = "json"):
+    console.print(f"Exporting stock report for symbols: {symbols} in {output_format} format")
+    # Implement your stock report export logic here
 
+
+@app.command()
+def export_recommendation(output_format: str = "json"):
+    console.print(f"Exporting recommendation in {output_format} format")
+    # Implement your recommendation export logic here
+
+
+if __name__ == "__main__":
+    app()
