@@ -1,6 +1,6 @@
 from typing import List
 
-from data_collection.models import NewsArticle
+from common.models.data_collection import NewsArticle
 
 
 class NewsCollectorBase:

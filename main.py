@@ -1,21 +1,5 @@
 import concurrent.futures
-import datetime
-import json
-import os
 from actions.generate_full_stock_report import generate_stock_report
-from actions.search_trending_stocks import search_trending_stocks
-from common.shorten_report import get_shortened_stock_symbol_report
-from config import MAX_REPORTS_FOR_RECOMMENDATIONS
-from data_collection.news_collection.marketaux_collector import MarketauxNewsCollector
-from data_collection.news_collection.news_api_collector import NewsAPICollector
-from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info
-from data_collection.stocks_search.stocks_search import find_stocks
-from export.export_purchase_recommendation_to_pdf import export_purchase_recommendation_to_pdf
-from export.export_stock_report_to_pdf import export_stock_report_to_pdf
-from recommendations_generator.get_recommendations import get_recommendations
-from recommendations_generator.models import RiskPreference
-from stock_analysis.models import StockSymbolReport
-
 
 # if __name__ == '__main__':
 #     stocks = search_trending_stocks()

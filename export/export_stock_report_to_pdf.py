@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 
 from reportlab.lib.pagesizes import letter
@@ -6,7 +5,7 @@ from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
 
-from stock_analysis.models import StockSymbolReport
+from common.models.stock_analysis import StockSymbolReport
 
 
 def export_stock_report_to_pdf(stock_report: StockSymbolReport, output_filename: str):

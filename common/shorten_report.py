@@ -1,6 +1,6 @@
 from typing import Dict
 
-from stock_analysis.models import StockSymbolReport
+from common.models.stock_analysis import StockSymbolReport
 
 
 def get_shortened_stock_symbol_report(report: StockSymbolReport) -> Dict:

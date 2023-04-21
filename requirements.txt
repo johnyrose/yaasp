@@ -3,3 +3,4 @@ openai
 newsapi-python
 pydantic
 finnhub-python
+SQLAlchemy

@@ -7,8 +7,8 @@ from common.shorten_report import get_shortened_stock_symbol_report
 from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
 from export.export_reports_to_json import export_purchase_recommendation
 from common.openai_prompts import GET_STOCK_RECOMMENDATION
-from recommendations_generator.models import RiskPreference, PurchaseRecommendation
-from stock_analysis.models import StockSymbolReport
+from common.models.recommendations import RiskPreference, PurchaseRecommendation
+from common.models.stock_analysis import StockSymbolReport
 
 
 def get_recommendations(stock_reports: List[StockSymbolReport], current_situation: str,

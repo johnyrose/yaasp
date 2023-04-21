@@ -3,7 +3,7 @@ import yfinance as yf
 
 from common.logger import logger
 from config import FINNHUB_API_KEY
-from data_collection.models import CompanyStockInfo
+from common.models.data_collection import CompanyStockInfo
 
 
 def get_company_name_from_symbol(company_symbol: str) -> str:

@@ -3,7 +3,7 @@ from typing import List
 from newsapi import NewsApiClient
 
 from config import NEWS_API_KEY
-from data_collection.models import NewsArticle
+from common.models.data_collection import NewsArticle
 from data_collection.news_collection.news_collector_base import NewsCollectorBase
 
 

@@ -1,16 +1,16 @@
 import datetime
 import json
-from typing import Optional, List
+from typing import List
 
 from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_SEARCH_TERMS_FOR_SELF_REFLEXION
 from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
-from data_collection.models import NewsArticle, CompanyStockInfo
+from common.models.data_collection import NewsArticle, CompanyStockInfo
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info, \
     get_company_name_from_symbol
 from export.export_reports_to_json import export_stock_symbol_report
-from stock_analysis.models import StockSymbolReport
+from common.models.stock_analysis import StockSymbolReport
 from stock_analysis.news_report_generator import generate_news_report
 from stock_analysis.stock_symbol_report_generator import generate_stock_symbol_report
 

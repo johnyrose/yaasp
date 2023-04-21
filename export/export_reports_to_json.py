@@ -6,8 +6,8 @@ from pathlib import Path
 
 from common.logger import logger
 from config import STOCK_SYMBOL_JSON_REPORTS_DIRECTORY, RECOMMENDATIONS_DIRECTORY
-from recommendations_generator.models import PurchaseRecommendation
-from stock_analysis.models import StockSymbolReport
+from common.models.recommendations import PurchaseRecommendation
+from common.models.stock_analysis import StockSymbolReport
 
 
 def create_directory_if_not_exists(directory: str) -> None:

@@ -2,7 +2,7 @@ import openai
 
 from common.logger import logger
 from config import OPENAI_API_KEY
-from stock_analysis.models import OpenAIModelType
+from common.models.stock_analysis import OpenAIModelType
 
 openai.api_key = OPENAI_API_KEY
 

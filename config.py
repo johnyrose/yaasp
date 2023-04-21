@@ -1,6 +1,6 @@
 import os
 
-from stock_analysis.models import OpenAIModelType
+from common.models.stock_analysis import OpenAIModelType
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
@@ -18,3 +18,7 @@ EXPORTS_DIRECTORY = os.getenv('EXPORTS_DIRECTORY', './exports')
 STOCK_SYMBOL_JSON_REPORTS_DIRECTORY = os.getenv('STOCK_SYMBOL_REPORTS_DIRECTORY',
                                                 f'{EXPORTS_DIRECTORY}/stock_symbol_reports')
 RECOMMENDATIONS_DIRECTORY = os.getenv('RECOMMENDATIONS_DIRECTORY', f'{EXPORTS_DIRECTORY}/recommendations')
+
+
+DB_FILE = os.getenv('DB_FILE', './sqlite.db')
+ENABLE_SQLALCHEMY_LOGGING = os.getenv('ENABLE_SQLALCHEMY_LOGGING', False)

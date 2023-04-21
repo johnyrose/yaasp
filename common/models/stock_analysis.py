@@ -1,9 +1,9 @@
-from typing import Dict, List
+from typing import List
 
 from pydantic import BaseModel
 import enum
 
-from data_collection.models import CompanyStockInfo
+from common.models.data_collection import CompanyStockInfo
 
 
 class OpenAIModelType(enum.Enum):

@@ -1,10 +1,9 @@
 from datetime import datetime
 
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, ListFlowable, ListItem
-from reportlab.lib import colors
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
 from reportlab.lib.styles import getSampleStyleSheet
-from recommendations_generator.models import PurchaseRecommendation
+from common.models.recommendations import PurchaseRecommendation
 
 
 def export_purchase_recommendation_to_pdf(purchase_recommendation: PurchaseRecommendation, output_filename: str):

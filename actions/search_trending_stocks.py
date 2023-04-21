@@ -6,7 +6,7 @@ from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_TRENDING_STOCKS
 from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
-from data_collection.models import NewsArticle
+from common.models.data_collection import NewsArticle
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 
 
