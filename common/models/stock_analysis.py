@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 
 from pydantic import BaseModel
@@ -43,9 +44,11 @@ class StockNewsReport(BaseModel):
     general_sentiment: GeneralSentiment
     sentiment_reason: str
     articles_summary: List[ArticleSummary]
+    timestamp: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
 class StockSymbolReport(BaseModel):
+    timestamp: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     stock_symbol: str
     news_report: StockNewsReport  # The news report for the stock symbol
     data: CompanyStockInfo  # The data for the stock symbol

@@ -1,6 +1,7 @@
 import json
 from typing import List
 
+from common.db_utils import save_to_db
 from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.shorten_report import get_shortened_stock_symbol_report
@@ -31,7 +32,7 @@ def get_recommendations(stock_reports: List[StockSymbolReport], current_situatio
             response_json = json.loads(response)
             logger.info(f"Got recommendations for stock reports. Recommendations: {response_json}")
             purchase_recommendation = PurchaseRecommendation(**response_json)
-            export_purchase_recommendation(purchase_recommendation)
+            save_to_db(purchase_recommendation)
             return purchase_recommendation
         except Exception as e:
             logger.error(f"Failed to get recommendations for stock reports: {stock_reports}. Error: {e}. Retrying...")

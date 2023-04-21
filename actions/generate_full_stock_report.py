@@ -2,6 +2,7 @@ import datetime
 import json
 from typing import List
 
+from common.db_utils import save_to_db
 from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_SEARCH_TERMS_FOR_SELF_REFLEXION
 from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
@@ -56,5 +57,5 @@ def generate_stock_report(stock_symbol: str, days_ago_news: int = 5,
     full_report = generate_stock_symbol_report(stock_symbol, stock_report, stock_info)
     if attempt_self_reflexion:
         full_report = perform_self_reflexion(full_report, stock_news, days_ago_news, stock_info)
-    export_stock_symbol_report(full_report)
+    save_to_db(full_report)
     return full_report

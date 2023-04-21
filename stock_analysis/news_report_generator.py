@@ -1,6 +1,7 @@
 import json
 from typing import List
 
+from common.db_utils import save_to_db
 from common.logger import logger
 from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
 from common.models.data_collection import NewsArticle
@@ -31,7 +32,8 @@ def _get_news_report(stock_symbol: str, article_summaries: List[ArticleSummary])
         try:
             openai_response = get_openai_response(prompt=prompt, model_type=OPENAI_MODEL_FOR_SIMPLE_TASKS)
             response_json = json.loads(openai_response)
-            return StockNewsReport(**response_json)
+            stock_news_report = StockNewsReport(**response_json)
+            return stock_news_report
         except Exception as e:
             if i == retry_count - 1:
                 raise e
@@ -41,4 +43,5 @@ def _get_news_report(stock_symbol: str, article_summaries: List[ArticleSummary])
 def generate_news_report(stock_symbol: str, news_articles: List[NewsArticle]) -> StockNewsReport:
     article_summaries = get_articles_summaries(stock_symbol, news_articles)
     news_report = _get_news_report(stock_symbol, article_summaries)
+    save_to_db(news_report)
     return news_report

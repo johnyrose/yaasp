@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Dict, Optional
 
 from pydantic import BaseModel
@@ -46,3 +47,4 @@ class CompanyStockInfo(BaseModel):
     dividend_yield: float
     ex_dividend_date: str
     company_earnings: Optional[List[Dict]]
+    timestamp: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

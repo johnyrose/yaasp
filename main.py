@@ -1,35 +1,32 @@
 import concurrent.futures
+from typing import List
+
 from actions.generate_full_stock_report import generate_stock_report
+from common.db_connection import session_object
+from common.db_utils import from_sqlalchemy
+from common.models.db_objects import StockSymbolReportDB
+from common.models.stock_analysis import StockSymbolReport
+
+
+def get_all_stock_symbol_reports() -> List[StockSymbolReport]:
+    stock_symbol_reports_db = session_object.query(StockSymbolReportDB).all()
+    return [from_sqlalchemy(report_db) for report_db in stock_symbol_reports_db]
+
 
 # if __name__ == '__main__':
-#     stocks = search_trending_stocks()
-#     print(stocks)
-    # s = find_stocks('S&P 500')
-    # print(s)
-    # d = find_stocks('DOW 30')
-    # print(d)
+#     res = get_all_stock_symbol_reports()
+#     print(res)
 if __name__ == '__main__':
 
     def get_report(symbol):
-        report = generate_stock_report(symbol, days_ago_news=3)
+        report = generate_stock_report(symbol, days_ago_news=3, attempt_self_reflexion=False)
 
-    # symbols = ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL", "NVDA", "BBBY"]
-    symbols = ["MSFT"]
-    # Create a ThreadPoolExecutor and run the threads
+    symbols = ["MSFT", "GOOGL", "INTC", "AMD", "EA", "ATVI", "TSLA", "AAPL", "NVDA", "BBBY"]
+    symbols = ["MSFT", "GOOGL", "EA", "AMD", "TSLA", "BBBY"]
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-        # Start the threads by calling my_function for each value
         futures = [executor.submit(get_report, value) for value in symbols]
-
-        # Wait for all threads to complete and collect the results
         results = [future.result() for future in concurrent.futures.as_completed(futures)]
-
-    # stock_reports = []
-    # for symbol in symbols:
-    #     try:
-    #         report = generate_stock_report(symbol, days_ago_news=3)
-    #         stock_reports.append(report)
-    #     except Exception as e:
-    #         print(f'Failed to generate report for {symbol} with error: {e}')
+    print(results)
     # files = os.listdir('exports/stock_symbol_reports')
     # stock_reports = [StockSymbolReport(**json.load(open(f'exports/stock_symbol_reports/{f}'))) for f in files]
 
