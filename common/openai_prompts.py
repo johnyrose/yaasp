@@ -168,10 +168,10 @@ Here are some relevant objects:
 
 class StockRecommendation(BaseModel):
     symbol: str
-    target_price: float
-    position: str
-    amount: int
-    explanation: str
+    target_price: float # The price you suggest buying the stock at
+    position: str # The position you suggest taking
+    amount: int # The amount of stocks you suggest buying
+    explanation: str # The reason for your recommendation
 
 
 class PurchaseRecommendation(BaseModel):
