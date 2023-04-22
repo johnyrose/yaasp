@@ -102,8 +102,8 @@ def generate_recommendation(
         f" following symbols: {[report.stock_symbol for report in reports_after_filtering]}")
     recs = get_recommendations(reports_after_filtering,
                                current_situation, RiskPreference(risk_preference.upper()))
-    export_purchase_recommendation(ExportType(export_type.upper()), recs)
-    console.print(f"Exported recommendation to file: {export_type}")
+    file_name = export_purchase_recommendation(ExportType(export_type.upper()), recs)
+    console.print(f"Exported recommendation to file: {file_name}")
 
 
 @app.command()
