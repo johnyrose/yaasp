@@ -193,6 +193,3 @@ def run_full_process(
 
 if __name__ == "__main__":
     app()
-
-
-# 5.77
