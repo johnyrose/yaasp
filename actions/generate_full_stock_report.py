@@ -44,8 +44,11 @@ def perform_self_reflexion(current_report: StockSymbolReport, current_news_artic
     response = get_openai_response(prompt, OPENAI_MODEL_FOR_SIMPLE_TASKS)
     search_terms = json.loads(response)
     for term in search_terms:
-        articles = NewsAPICollector(term).get_news_articles(num_articles=3, from_param=start_date)
-        current_news_articles += articles
+        try:
+            articles = NewsAPICollector(term).get_news_articles(num_articles=3, from_param=start_date)
+            current_news_articles += articles
+        except Exception as e:
+            logger.warning(f"Failed to get news for {term} with the following error: {e}")
     updated_news_report = generate_news_report(current_report.stock_symbol, current_news_articles)
     new_full_report = generate_stock_symbol_report(current_report.stock_symbol, updated_news_report, stock_info)
     return new_full_report

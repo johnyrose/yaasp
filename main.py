@@ -15,7 +15,7 @@ from db.get_purchase_recommendations import get_most_recent_purchase_recommendat
 from db.get_stock_symbol_reports import get_all_stock_symbol_reports, get_most_recent_stock_symbol_reports
 from export.export_reports import export_stock_report, export_purchase_recommendation
 from export.export_reports_to_json import export_stock_symbol_report_to_json
-from recommendations_generator.get_recommendations import generate_purchase_recommendation
+from recommendations_generator.generate_recommendation import generate_purchase_recommendation
 
 app = typer.Typer()
 console = Console()
