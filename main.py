@@ -1,4 +1,5 @@
 import concurrent.futures
+from datetime import datetime, timedelta
 from typing import List, Optional
 
 import typer
@@ -76,7 +77,9 @@ def generate_recommendation(
         input_file: str = typer.Option(..., help="A file containing the users current state, preferences, etc."),
         risk_preference: str = typer.Option(RiskPreference.MODERATE,
                                             help="The users risk preference. Can be: risky, moderate, safe"),
-        export_type: str = typer.Option(ExportType.JSON, help="Export type, can be json or pdf")):
+        export_type: str = typer.Option(ExportType.JSON, help="Export type, can be json or pdf"),
+        days_ago_reports: int = typer.Option(2, help="Number of days old to consider reports valid. "
+                                                     "Older reports will be ignored.")):
     try:
         current_situation = open(input_file, "r").read()
         console.print(f"Generating recommendations for file: {input_file}")
@@ -85,7 +88,19 @@ def generate_recommendation(
         return
     stock_reports = get_most_recent_stock_symbol_reports()
     stock_reports_by_score = sorted(stock_reports, key=lambda x: x.stock_score, reverse=True)
-    recs = get_recommendations(stock_reports_by_score[:MAX_REPORTS_FOR_RECOMMENDATIONS],
+
+    stock_reports_by_score = sorted(stock_reports, key=lambda x: x.stock_score, reverse=True)
+
+    valid_timeframe = datetime.now() - timedelta(days=days_ago_reports)
+    recent_stock_reports = [report for report in stock_reports_by_score if
+                            datetime.strptime(report.timestamp, "%Y-%m-%d %H:%M:%S") >= valid_timeframe]
+
+    reports_after_filtering = recent_stock_reports[:MAX_REPORTS_FOR_RECOMMENDATIONS]
+
+    console.print(
+        f"Generating recommendations, considering the"
+        f" following symbols: {[report.stock_symbol for report in reports_after_filtering]}")
+    recs = get_recommendations(reports_after_filtering,
                                current_situation, RiskPreference(risk_preference.upper()))
     export_purchase_recommendation(ExportType(export_type.upper()), recs)
     console.print(f"Exported recommendation to file: {export_type}")
