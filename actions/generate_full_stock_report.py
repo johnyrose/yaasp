@@ -62,6 +62,9 @@ def generate_full_stock_report(stock_symbol: str, days_ago_news: int = 5,
     stock_info = get_stock_info(stock_symbol)
     full_report = generate_stock_symbol_report(stock_symbol, stock_report, stock_info)
     if attempt_self_reflexion:
-        full_report = perform_self_reflexion(full_report, stock_news, days_ago_news, stock_info)
+        try:
+            full_report = perform_self_reflexion(full_report, stock_news, days_ago_news, stock_info)
+        except Exception as e:
+            logger.warning(f"Failed to perform self reflexion with the following error: {e}")
     save_to_db(full_report)
     return full_report
