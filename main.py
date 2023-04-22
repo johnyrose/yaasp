@@ -89,8 +89,6 @@ def generate_recommendation(
     stock_reports = get_most_recent_stock_symbol_reports()
     stock_reports_by_score = sorted(stock_reports, key=lambda x: x.stock_score, reverse=True)
 
-    stock_reports_by_score = sorted(stock_reports, key=lambda x: x.stock_score, reverse=True)
-
     valid_timeframe = datetime.now() - timedelta(days=days_ago_reports)
     recent_stock_reports = [report for report in stock_reports_by_score if
                             datetime.strptime(report.timestamp, "%Y-%m-%d %H:%M:%S") >= valid_timeframe]
@@ -195,3 +193,6 @@ def run_full_process(
 
 if __name__ == "__main__":
     app()
+
+
+# 5.77
