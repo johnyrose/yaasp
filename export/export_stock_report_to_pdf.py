@@ -8,13 +8,13 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 from common.models.stock_analysis import StockSymbolReport
 from config import STOCK_SYMBOL_REPORTS_DIRECTORY
-from export.export_reports_to_json import create_directory_if_not_exists, generate_filename
+from export.export_reports_to_json import create_directory_if_not_exists
 
 
-def export_stock_report_to_pdf(stock_report: StockSymbolReport):
+def export_stock_report_to_pdf(stock_report: StockSymbolReport) -> str:
     create_directory_if_not_exists(STOCK_SYMBOL_REPORTS_DIRECTORY)
-    filename = generate_filename(f"StockSymbolReport_{stock_report.stock_symbol}.pdf")
-    file_path = Path(STOCK_SYMBOL_REPORTS_DIRECTORY) / filename
+    filename = f"StockSymbolReport_{stock_report.stock_symbol}.pdf"
+    file_path = str(Path(STOCK_SYMBOL_REPORTS_DIRECTORY) / filename)
 
     doc = SimpleDocTemplate(file_path, pagesize=letter)
     styles = getSampleStyleSheet()
@@ -98,5 +98,4 @@ def export_stock_report_to_pdf(stock_report: StockSymbolReport):
 
     # Build the PDF
     doc.build(content)
-
-
+    return file_path

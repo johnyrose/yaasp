@@ -5,14 +5,14 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
 from reportlab.lib.styles import getSampleStyleSheet
 from common.models.recommendations import PurchaseRecommendation
-from config import STOCK_SYMBOL_REPORTS_DIRECTORY
-from export.export_reports_to_json import create_directory_if_not_exists, generate_filename
+from config import RECOMMENDATIONS_DIRECTORY
+from export.export_reports_to_json import create_directory_if_not_exists
 
 
-def export_purchase_recommendation_to_pdf(purchase_recommendation: PurchaseRecommendation):
-    create_directory_if_not_exists(STOCK_SYMBOL_REPORTS_DIRECTORY)
-    filename = generate_filename(f"StockSymbolReport_{purchase_recommendation.timestamp}.pdf")
-    file_path = Path(STOCK_SYMBOL_REPORTS_DIRECTORY) / filename
+def export_purchase_recommendation_to_pdf(purchase_recommendation: PurchaseRecommendation) -> str:
+    create_directory_if_not_exists(RECOMMENDATIONS_DIRECTORY)
+    filename = f"PurchaseRecommendation_{purchase_recommendation.timestamp.replace(' ', '-')}.pdf"
+    file_path = str(Path(RECOMMENDATIONS_DIRECTORY) / filename)
 
     doc = SimpleDocTemplate(file_path, pagesize=letter)
     styles = getSampleStyleSheet()
@@ -57,3 +57,4 @@ def export_purchase_recommendation_to_pdf(purchase_recommendation: PurchaseRecom
 
     # Build the PDF
     doc.build(content)
+    return file_path
