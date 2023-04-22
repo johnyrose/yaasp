@@ -1,10 +1,11 @@
 import concurrent.futures
-from typing import List
+from typing import List, Optional
 
 import typer
 from rich.console import Console
 
 from actions.generate_full_stock_report import generate_full_stock_report
+from actions.search_trending_stocks import search_trending_stocks
 from common.models.export_type import ExportType
 from common.models.recommendations import RiskPreference
 from common.models.stock_analysis import StockSymbolReport
@@ -92,6 +93,15 @@ def get_latest_recommendation(export_type: str = typer.Option("json", help="Expo
     recommendation = get_most_recent_purchase_recommendation()
     exported_rec = export_purchase_recommendation(ExportType(export_type.upper()), recommendation)
     console.print(f"Exported recommendation to file: {exported_rec}")
+
+
+@app.command()
+def get_trending_stocks(free_text: Optional[str] = typer.Option(None,
+                                                                help="Free text to search for. If not provided, general"
+                                                                     " trending stocks will be searched.")):
+    console.print(f"Searching for trending stocks with free text: {free_text}")
+    trending_stocks = search_trending_stocks(free_text=free_text)
+    console.print(f"Trending stocks found: {trending_stocks}")
 
 
 if __name__ == "__main__":

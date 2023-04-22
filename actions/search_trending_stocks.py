@@ -1,6 +1,6 @@
 import datetime
 import json
-from typing import List
+from typing import List, Optional
 
 from common.logger import logger
 from common.openai_adapter import get_openai_response
@@ -10,22 +10,29 @@ from common.models.data_collection import NewsArticle
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 
 
-def find_news_on_trending_stocks(days_ago_news: int) -> List[NewsArticle]:
+def find_news_on_trending_stocks(days_ago_news: int, free_text: Optional[str] = None) -> List[NewsArticle]:
     end_date = datetime.date.today()
     start_date = end_date - datetime.timedelta(days=days_ago_news)
-    search_queries = [
-        'stock market',
-        'trending stocks',
-        'stocks to watch'
-    ]
+    if not free_text:
+        search_queries = [
+            'stock market',
+            'trending stocks',
+            'stocks to watch'
+        ]
+    else:
+        search_queries = [
+            free_text,
+            f'{free_text} stocks',
+        ]
+    logger.info(f"Searching for news on trending stocks from {start_date} to {end_date} with queries: {search_queries}")
     articles = []
     for query in search_queries:
         articles += NewsAPICollector(query).get_news_articles(num_articles=4, from_param=start_date)
     return articles
 
 
-def search_trending_stocks(days_ago_news: int = 2) -> List[str]:
-    articles = find_news_on_trending_stocks(days_ago_news)
+def search_trending_stocks(days_ago_news: int = 2, free_text: Optional[str] = None) -> List[str]:
+    articles = find_news_on_trending_stocks(days_ago_news, free_text)
     prompt = GET_TRENDING_STOCKS.format(
         articles=articles
     )
