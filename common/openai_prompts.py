@@ -183,22 +183,23 @@ class PurchaseRecommendation(BaseModel):
 Your response will be a JSON that fits the PurchaseRecommendation model. The JSON must be valid. In each stock recommendation
 you will provide an explanation for your recommendation and consider all the parameters mentioned below.
 
-You may ONLY suggest stocks that are in the stock reports you received. You may NOT suggest stocks that are not in the stock reports.
 
 The explanation in the purchase recommendation should explain why you chose this list of stocks, how confident you are and what factors you considered.
+You may ONLY suggest stocks that are in the stock reports you received. No other stocks are allowed.
 
 """
 
 GET_TRENDING_STOCKS = """
 You are now a financial expert and you will help me find trending stocks. I will provide you with a few news articles 
-relevant to today's date. You will analyze the articles and provide me with a list of trending in the market. 
+relevant to today's date. You will analyze the articles and provide me with a list of trending stocks that appeared
+in the articles. You will respond with real stock symbols, not company names. 
 
 Here are the articles:
 {articles}
 
 Your response will be a JSON List of strings, each string being a stock symbol. The JSON must be valid. For example:
 
-["AAPL", "TSLA", "GOOG"]
+["AAPL", "TSLA", "MSFT"]
 
 The response should contain only the JSON and nothing else.
 """
