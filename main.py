@@ -48,7 +48,10 @@ def generate_stock_report(
         console.print(f"Finished Generating stock reports for symbols: {', '.join(symbols_list)}")
 
         for result in results:
-            exported_files.append(export_stock_report(ExportType(export_type.upper()), result))
+            try:
+                exported_files.append(export_stock_report(ExportType(export_type.upper()), result))
+            except Exception as e:
+                console.print(f"Error exporting stock report for symbol: {result.stock_symbol}, error: {e}")
     if exported_files:
         console.print(f"Exported stock reports to files: {exported_files}")
 

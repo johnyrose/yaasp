@@ -21,7 +21,7 @@ def export_stock_report_to_pdf(stock_report: StockSymbolReport) -> str:
     content = []
 
     # Stock Symbol Header
-    current_date_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+    current_date_time = stock_report.timestamp
     stock_symbol_header = Paragraph(f"Stock Report for {stock_report.stock_symbol} ({current_date_time})",
                                     styles['Heading1'])
     content.append(stock_symbol_header)
@@ -46,6 +46,13 @@ def export_stock_report_to_pdf(stock_report: StockSymbolReport) -> str:
         f"Confidence Level: <strong>{stock_report.confidence_level}/10</strong> - {stock_report.confidence_explanation}",
         styles['BodyText'])
     content.append(confidence_level)
+    content.append(Spacer(1, 12))
+
+    # Stock Score
+    stock_score = Paragraph(
+        f"Stock Score: <strong>{stock_report.stock_score}/10</strong>",
+        styles['BodyText'])
+    content.append(stock_score)
     content.append(Spacer(1, 12))
 
     # Stock Data
