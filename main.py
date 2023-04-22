@@ -15,7 +15,7 @@ from db.get_purchase_recommendations import get_most_recent_purchase_recommendat
 from db.get_stock_symbol_reports import get_all_stock_symbol_reports, get_most_recent_stock_symbol_reports
 from export.export_reports import export_stock_report, export_purchase_recommendation
 from export.export_reports_to_json import export_stock_symbol_report_to_json
-from recommendations_generator.get_recommendations import get_recommendations
+from recommendations_generator.get_recommendations import generate_purchase_recommendation
 
 app = typer.Typer()
 console = Console()
@@ -100,8 +100,8 @@ def generate_recommendation(
     console.print(
         f"Generating recommendations, considering the"
         f" following symbols: {[report.stock_symbol for report in reports_after_filtering]}")
-    recs = get_recommendations(reports_after_filtering,
-                               current_situation, RiskPreference(risk_preference.upper()))
+    recs = generate_purchase_recommendation(reports_after_filtering,
+                                            current_situation, RiskPreference(risk_preference.upper()))
     file_name = export_purchase_recommendation(ExportType(export_type.upper()), recs)
     console.print(f"Exported recommendation to file: {file_name}")
 
@@ -187,8 +187,8 @@ def run_full_process(
     console.print(
         f"Generating recommendations, considering the"
         f" following symbols: {[report.stock_symbol for report in reports_after_filtering]}")
-    recs = get_recommendations(reports_after_filtering,
-                               current_situation, RiskPreference(risk_preference.upper()))
+    recs = generate_purchase_recommendation(reports_after_filtering,
+                                            current_situation, RiskPreference(risk_preference.upper()))
     file_name = export_purchase_recommendation(ExportType(export_type.upper()), recs)
     console.print(f"Exported recommendation to file: {file_name}")
 
