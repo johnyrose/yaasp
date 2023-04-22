@@ -2,6 +2,7 @@ from typing import List
 
 from newsapi import NewsApiClient
 
+from common.logger import logger
 from config import NEWS_API_KEY
 from common.models.data_collection import NewsArticle
 from data_collection.news_collection.news_collector_base import NewsCollectorBase
@@ -22,10 +23,15 @@ class NewsAPICollector(NewsCollectorBase):
         :return:
         """
         articles = self.newsapi.get_everything(q=self.query, page_size=num_articles, *args, **kwargs)
-        return [NewsArticle(
-            source=article['source']['name'],
-            title=article['title'],
-            body=article['description'],
-            date=article['publishedAt']
-            )
-            for article in articles['articles']]
+        returned_articles = []
+        for article in articles['articles']:
+            try:
+                returned_articles.append(NewsArticle(
+                    source=article['source']['name'],
+                    title=article['title'],
+                    body=article['description'],
+                    date=article['publishedAt']
+                ))
+            except Exception as e:
+                logger.warning(f"Failed to get article from NewsAPI with the following error: {e}. Skipping...")
+        return returned_articles

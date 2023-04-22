@@ -13,6 +13,7 @@ def get_company_name_from_symbol(company_symbol: str) -> str:
 
 
 def get_stock_info(company_symbol: str) -> CompanyStockInfo:
+    logger.info(f"Getting stock financial info for {company_symbol}...")
     ticker = yf.Ticker(company_symbol)
     info = ticker.info
 

@@ -3,6 +3,7 @@ import json
 from typing import List
 
 from common.db_utils import save_to_db
+from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_SEARCH_TERMS_FOR_SELF_REFLEXION
 from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
@@ -25,7 +26,10 @@ def get_stock_news(stock_symbol: str, days_ago_news: int = 5) -> List[NewsArticl
     search_queries = [stock_symbol, company_name, f"{company_name} stock"]
     articles = []
     for query in search_queries:
-        articles += NewsAPICollector(query).get_news_articles(num_articles=4, from_param=start_date)
+        try:
+            articles += NewsAPICollector(query).get_news_articles(num_articles=4, from_param=start_date)
+        except Exception as e:
+            logger.warning(f"Failed to get news for {query} with the following error: {e}")
 
     return articles
 
