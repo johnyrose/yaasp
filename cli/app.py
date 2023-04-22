@@ -7,7 +7,7 @@ from rich.console import Console
 from actions.generate_full_stock_report import generate_full_stock_report
 from common.models.stock_analysis import StockSymbolReport
 from config import MAX_REPORT_FETCHING_THREADS
-from export.export_reports_to_json import export_stock_symbol_report
+from export.export_reports_to_json import export_stock_symbol_report_to_json
 
 app = typer.Typer()
 console = Console()
@@ -32,7 +32,7 @@ def generate_stock_report(
 
         if export_pdf:
             for result in results:
-                exported_files.append(export_stock_symbol_report(result))
+                exported_files.append(export_stock_symbol_report_to_json(result))
     if exported_files:
         console.print(f"Exported stock reports to files: {exported_files}")
 

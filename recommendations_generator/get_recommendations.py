@@ -6,7 +6,7 @@ from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.shorten_report import get_shortened_stock_symbol_report
 from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
-from export.export_reports_to_json import export_purchase_recommendation
+from export.export_reports_to_json import export_purchase_recommendation_to_json
 from common.openai_prompts import GET_STOCK_RECOMMENDATION
 from common.models.recommendations import RiskPreference, PurchaseRecommendation
 from common.models.stock_analysis import StockSymbolReport

@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
@@ -6,10 +7,16 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet
 
 from common.models.stock_analysis import StockSymbolReport
+from config import STOCK_SYMBOL_REPORTS_DIRECTORY
+from export.export_reports_to_json import create_directory_if_not_exists, generate_filename
 
 
-def export_stock_report_to_pdf(stock_report: StockSymbolReport, output_filename: str):
-    doc = SimpleDocTemplate(output_filename, pagesize=letter)
+def export_stock_report_to_pdf(stock_report: StockSymbolReport):
+    create_directory_if_not_exists(STOCK_SYMBOL_REPORTS_DIRECTORY)
+    filename = generate_filename(f"StockSymbolReport_{stock_report.stock_symbol}.pdf")
+    file_path = Path(STOCK_SYMBOL_REPORTS_DIRECTORY) / filename
+
+    doc = SimpleDocTemplate(file_path, pagesize=letter)
     styles = getSampleStyleSheet()
     content = []
 

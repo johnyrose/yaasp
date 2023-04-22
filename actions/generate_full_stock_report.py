@@ -10,7 +10,6 @@ from common.models.data_collection import NewsArticle, CompanyStockInfo
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info, \
     get_company_name_from_symbol
-from export.export_reports_to_json import export_stock_symbol_report
 from common.models.stock_analysis import StockSymbolReport
 from stock_analysis.news_report_generator import generate_news_report
 from stock_analysis.stock_symbol_report_generator import generate_stock_symbol_report

@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from pathlib import Path
 
 from common.logger import logger
-from config import STOCK_SYMBOL_JSON_REPORTS_DIRECTORY, RECOMMENDATIONS_DIRECTORY
+from config import STOCK_SYMBOL_REPORTS_DIRECTORY, RECOMMENDATIONS_DIRECTORY
 from common.models.recommendations import PurchaseRecommendation
 from common.models.stock_analysis import StockSymbolReport
 
@@ -25,20 +25,21 @@ def export_json_to_file(json_data: BaseModel, file_path: str) -> None:
         json.dump(json_data.dict(), outfile, indent=4)
 
 
-def export_stock_symbol_report(report: StockSymbolReport) -> str:
+def export_stock_symbol_report_to_json(report: StockSymbolReport) -> str:
     logger.info(f"Exporting stock symbol report for {report.stock_symbol} to JSON.")
-    create_directory_if_not_exists(STOCK_SYMBOL_JSON_REPORTS_DIRECTORY)
+    create_directory_if_not_exists(STOCK_SYMBOL_REPORTS_DIRECTORY)
     filename = generate_filename(f"StockSymbolReport_{report.stock_symbol}")
-    file_path = Path(STOCK_SYMBOL_JSON_REPORTS_DIRECTORY) / filename
+    file_path = Path(STOCK_SYMBOL_REPORTS_DIRECTORY) / filename
     export_json_to_file(report, file_path)
     logger.info(f"Exported stock symbol report for {report.stock_symbol} to JSON.")
-    return file_path
+    return str(file_path)
 
 
-def export_purchase_recommendation(recommendation: PurchaseRecommendation) -> None:
+def export_purchase_recommendation_to_json(recommendation: PurchaseRecommendation) -> str:
     logger.info(f"Exporting purchase recommendation to JSON.")
     create_directory_if_not_exists(RECOMMENDATIONS_DIRECTORY)
     filename = generate_filename("PurchaseRecommendation")
     file_path = Path(RECOMMENDATIONS_DIRECTORY) / filename
     export_json_to_file(recommendation, file_path)
     logger.info(f"Exported purchase recommendation to JSON.")
+    return str(file_path)

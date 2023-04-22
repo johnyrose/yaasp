@@ -1,13 +1,20 @@
 from datetime import datetime
+from pathlib import Path
 
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
 from reportlab.lib.styles import getSampleStyleSheet
 from common.models.recommendations import PurchaseRecommendation
+from config import STOCK_SYMBOL_REPORTS_DIRECTORY
+from export.export_reports_to_json import create_directory_if_not_exists, generate_filename
 
 
-def export_purchase_recommendation_to_pdf(purchase_recommendation: PurchaseRecommendation, output_filename: str):
-    doc = SimpleDocTemplate(output_filename, pagesize=letter)
+def export_purchase_recommendation_to_pdf(purchase_recommendation: PurchaseRecommendation):
+    create_directory_if_not_exists(STOCK_SYMBOL_REPORTS_DIRECTORY)
+    filename = generate_filename(f"StockSymbolReport_{purchase_recommendation.timestamp}.pdf")
+    file_path = Path(STOCK_SYMBOL_REPORTS_DIRECTORY) / filename
+
+    doc = SimpleDocTemplate(file_path, pagesize=letter)
     styles = getSampleStyleSheet()
     content = []
 

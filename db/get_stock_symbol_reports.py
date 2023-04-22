@@ -32,3 +32,8 @@ def get_most_recent_stock_symbol_reports() -> List[StockSymbolReport]:
     )
 
     return [from_sqlalchemy(report_db) for report_db in most_recent_reports_db]
+
+
+def get_all_stock_symbol_reports() -> List[StockSymbolReport]:
+    stock_symbol_reports_db = session_object.query(StockSymbolReportDB).all()
+    return [from_sqlalchemy(report_db) for report_db in stock_symbol_reports_db]
