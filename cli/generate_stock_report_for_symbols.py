@@ -1,9 +1,8 @@
 import concurrent.futures
 from typing import List
 
-from rich import console
-
 from actions.generate_full_stock_report import generate_full_stock_report
+from cli.typer_objects import console
 from common.models.export_type import ExportType
 from common.models.stock_analysis import StockSymbolReport
 from config import MAX_REPORT_FETCHING_THREADS

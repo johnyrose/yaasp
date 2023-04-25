@@ -12,15 +12,13 @@ from cli.generate_stock_report_for_symbols import generate_stock_report_for_symb
 from cli.get_latest_recommendation_export import get_latest_recommendation_export
 from cli.get_stock_reports import get_current_stock_reports
 from cli.get_trending_stocks_search import get_trending_stocks_search
+from cli.typer_objects import app, console
 from common.models.export_type import ExportType
 from common.models.recommendations import RiskPreference
 from config import MAX_REPORT_FETCHING_THREADS, MAX_REPORTS_FOR_RECOMMENDATIONS
 from db.get_stock_symbol_reports import get_most_recent_stock_symbol_reports
 from export.export_reports import export_stock_report, export_purchase_recommendation
 from recommendations_generator.generate_recommendation import generate_purchase_recommendation
-
-app = typer.Typer()
-console = Console()
 
 
 @app.command()
@@ -44,8 +42,8 @@ def generate_recommendation(input_file: str = typer.Option(..., help="A file con
 def generate_stock_report(symbols: str = typer.Option(..., help="List of stock symbols separated by commas,"
                                                                 " like msft,aapl,amzn"),
                           days_ago_news: int = typer.Option(5, help="Number of days ago to fetch news"),
-                          attempt_self_reflexion: bool = typer.Option(True, help="Attempt self reflexion"
-                                                                                 " for the report"),
+                          attempt_self_reflexion: bool = typer.Option(False, help="Attempt self reflexion"
+                                                                                  " for the report"),
                           export_type: str = typer.Option(ExportType.JSON, help="The type of file to "
                                                                                 "export to. "
                                                                                 "Can be json or pdf")) -> None:
@@ -96,16 +94,17 @@ def get_trending_stocks(free_text: Optional[str] = typer.Option(None, help="Free
 
 @app.command()
 def run_full_process(
-    search_trending: bool = typer.Option(False, help="Search for trending stocks"),
-    free_text: Optional[str] = typer.Option(None, help="Free text to search for trending stocks"),
-    symbols: Optional[str] = typer.Option(None, help="List of stock symbols separated by commas, like msft,aapl,amzn"),
-    input_file: str = typer.Option(..., help="A file containing the user's current state, preferences, etc."),
-    export_type: str = typer.Option(ExportType.JSON, help="Export type, can be json or pdf"),
-    days_ago_news: int = typer.Option(5, help="Number of days ago to fetch news"),
-    risk_preference: str = typer.Option(RiskPreference.MODERATE, help="The user's risk preference. "
-                                                                      "Can be: risky, moderate, safe"),
-    days_ago_reports: int = typer.Option(2, help="Number of days old to consider reports valid. "
-                                                 "Older reports will be ignored.")
+        search_trending: bool = typer.Option(False, help="Search for trending stocks"),
+        free_text: Optional[str] = typer.Option(None, help="Free text to search for trending stocks"),
+        symbols: Optional[str] = typer.Option(None,
+                                              help="List of stock symbols separated by commas, like msft,aapl,amzn"),
+        input_file: str = typer.Option(..., help="A file containing the user's current state, preferences, etc."),
+        export_type: str = typer.Option(ExportType.JSON, help="Export type, can be json or pdf"),
+        days_ago_news: int = typer.Option(5, help="Number of days ago to fetch news"),
+        risk_preference: str = typer.Option(RiskPreference.MODERATE, help="The user's risk preference. "
+                                                                          "Can be: risky, moderate, safe"),
+        days_ago_reports: int = typer.Option(2, help="Number of days old to consider reports valid. "
+                                                     "Older reports will be ignored.")
 ):
     # TODO: Yes this is an ugly function, make it better
     if search_trending:
@@ -167,6 +166,5 @@ def run_full_process(
 
 if __name__ == "__main__":
     app()
-
 
 # 10.84

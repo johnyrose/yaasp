@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Optional
 
-from rich.ansi import console
-
+from cli.typer_objects import console
 from common.models.export_type import ExportType
 from common.models.recommendations import RiskPreference
 from config import MAX_REPORTS_FOR_RECOMMENDATIONS
