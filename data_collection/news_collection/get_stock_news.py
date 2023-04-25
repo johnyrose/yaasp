@@ -22,10 +22,9 @@ def is_stock_index(stock_symbol: str) -> bool:
 
 
 def get_stock_news(stock_symbol: str, days_ago_news: int = 5) -> List[NewsArticle]:
-    news_sources_to_use = NEWS_SOURCES_TO_USE.split(",")
 
     # Check for unknown news sources
-    for source in news_sources_to_use:
+    for source in NEWS_SOURCES_TO_USE:
         if source.strip() not in news_sources_mapping:
             raise ValueError(f"Unknown news source: {source}")
 
@@ -40,7 +39,7 @@ def get_stock_news(stock_symbol: str, days_ago_news: int = 5) -> List[NewsArticl
 
     articles = []
 
-    for query, source in zip(search_queries, cycle(news_sources_to_use)):
+    for query, source in zip(search_queries, cycle(NEWS_SOURCES_TO_USE)):
         collector_class = news_sources_mapping.get(source.strip())
         try:
             collector = collector_class(query)

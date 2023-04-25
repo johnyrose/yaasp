@@ -1,0 +1,26 @@
+{
+  "api_keys": {
+    "openai_api_key": "",
+    "news_api_key": "",
+    "marketaux_api_key": "",
+    "finnhub_api_key": ""
+  },
+  "news_sources": ["newsapi", "marketaux"],
+  "openai_models": {
+    "simple_tasks": "GPT_35_TURBO",
+    "complicated_tasks": "GPT_4"
+  },
+  "reports_and_recommendations": {
+    "max_reports": 12
+  },
+  "directories": {
+    "exports_directory": "./exports"
+  },
+  "database": {
+    "db_file": "./sqlite.db",
+    "enable_sqlalchemy_logging": false
+  },
+  "threading": {
+    "max_report_fetching_threads": 10
+  }
+}
