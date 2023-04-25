@@ -102,5 +102,3 @@ def get_trending_stocks(free_text: Optional[str] = typer.Option(None, help="Free
 
 if __name__ == "__main__":
     app()
-
-# 10.84
