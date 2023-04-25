@@ -33,13 +33,14 @@ pip install -r requirements.txt
 ## Getting started
 
 The tool uses the following external services at the moment:
-AI Analysis:
+
+**AI Analysis:**
 * [OpenAI](https://openai.com/) - for generating text using GPT3.5 and GPT4 models
 
-Stock data:
+**Stock data:**
 * [Finnhub](https://finnhub.io/) - for fetching stock prices and market caps
 
-News Sources:
+**News Sources:**
 * [News API](https://newsapi.org/) - for fetching news articles about given stock symbols
 * [Marketaux](https://marketaux.com/) - for fetching financial statements about given stock symbols
 
