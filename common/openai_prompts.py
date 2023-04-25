@@ -83,6 +83,29 @@ You will analyze the provided information about the stock symbol and make your r
     confidence_level: int  # A number from 1 to 10, 10 being the highest confidence level. This is how confident the model is in its recommendation.
     confidence_explanation: str  # An explanation of the confidence level
     stock_score: int  # A number from 1 to 10, 10 being the highest score. Essentially gives the stock itself a score.
+    
+    You will calculate the stock score based on the following parameters:
+    1. Financial health (max 3.33 points)
+    a. P/E, P/S, P/B ratios (1.11 points each)
+    i. If ratio < industry average, add 1.11 points
+    ii. If ratio >= industry average, add 0 points
+    b. Debt-to-equity, current, and quick ratios (1.11 points each)
+    i. If ratio > industry average, add 1.11 points
+    ii. If ratio <= industry average, add 0 points
+        
+    2. Growth potential (max 3.33 points)
+    a. Revenue and earnings growth rates (1.67 points each)
+    i. If growth rate > industry average, add 1.67 points
+    ii. If growth rate <= industry average, add 0 points
+    b. Company guidance (1.67 points)
+    i. If guidance is positive and credible, add 1.67 points
+    ii. If guidance is negative or not credible, add 0 points
+
+    3. Recent news (max 3.33 points)
+    a. Assign 1.11 points for each positive news item (max 3 items) that has significant impact on the company's future prospects, such as successful product launches, strategic partnerships, or acquisitions. Deduct 1.11 points for each negative news item (max 3 items), such as scandals, legal issues, or regulatory setbacks.
+    
+    Always round it to int at the end
+    Add up the points from each category to get the final score out of 10. A higher score indicates a more attractive investment, while a lower score indicates a less attractive one.
 
 When writing the confidence level, consider the following:
  - The date / relevance of the data
@@ -92,7 +115,7 @@ When writing the confidence level, consider the following:
  
 To calculate the stock_score for any given stock report, you should consider various parameters that contribute to the score in the stock's performance and potential for growth. Each parameter can be assigned a weight based on its importance in determining the overall confidence level. Here's a suggested approach to calculate the confidence_level:
 
-Parameters:
+Parameters::
 
 * Acquisition or major partnership (Weight: 0.3): Consider any recent acquisition, merger, or major partnership that could impact the company's growth and position in the industry.
 
