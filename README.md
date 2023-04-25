@@ -20,7 +20,7 @@ Once the user has generated stock symbol reports for the stocks they are interes
 ## Output examples:
 
 * [Stock symbol report](docs/StockSymbolReport_Example.pdf) - A report on a single stock symbol
-* [Stock purchase recommendation](docs/PurchaseRecommendation_Example.pdf) - A recommendation on which stock to buy based on user preferences and existing stock symbol reports
+* [Stock purchase recommendation](docs/PurchaseRecommendation_example.pdf) - A recommendation on which stock to buy based on user preferences and existing stock symbol reports
 
 ## Installation
 
