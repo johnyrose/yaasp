@@ -1,7 +1,7 @@
 import json
 import os
 
-from common.models.stock_analysis import OpenAIModelType
+from src.common.models.stock_analysis import OpenAIModelType
 
 
 # Load JSON configuration

@@ -3,22 +3,21 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 import typer
-from rich.console import Console
 
-from actions.generate_full_stock_report import generate_full_stock_report
-from actions.search_trending_stocks import search_trending_stocks
-from cli.generate_recommendation import generate_recommendation_for_file
-from cli.generate_stock_report_for_symbols import generate_stock_report_for_symbols
-from cli.get_latest_recommendation_export import get_latest_recommendation_export
-from cli.get_stock_reports import get_current_stock_reports
-from cli.get_trending_stocks_search import get_trending_stocks_search
-from cli.typer_objects import app, console
-from common.models.export_type import ExportType
-from common.models.recommendations import RiskPreference
+from src.actions import generate_full_stock_report
+from src.actions import search_trending_stocks
+from src.cli.generate_recommendation import generate_recommendation_for_file
+from src.cli.generate_stock_report_for_symbols import generate_stock_report_for_symbols
+from src.cli.get_latest_recommendation_export import get_latest_recommendation_export
+from src.cli.get_stock_reports import get_current_stock_reports
+from src.cli.get_trending_stocks_search import get_trending_stocks_search
+from src.cli.typer_objects import app, console
+from src.common.models.export_type import ExportType
+from src.common.models.recommendations import RiskPreference
 from config import MAX_REPORT_FETCHING_THREADS, MAX_REPORTS_FOR_RECOMMENDATIONS
-from db.get_stock_symbol_reports import get_most_recent_stock_symbol_reports
-from export.export_reports import export_stock_report, export_purchase_recommendation
-from recommendations_generator.generate_recommendation import generate_purchase_recommendation
+from src.db.get_stock_symbol_reports import get_most_recent_stock_symbol_reports
+from src.export.export_reports import export_stock_report, export_purchase_recommendation
+from src.recommendations_generator.generate_recommendation import generate_purchase_recommendation
 
 
 @app.command()
