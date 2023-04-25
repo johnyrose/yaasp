@@ -7,7 +7,7 @@ from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_TRENDING_STOCKS
 from config import SEARCHING_FOR_TRENDING_STOCKS_MODEL
 from common.models.data_collection import NewsArticle
-from data_collection.news_collection.news_api_collector import NewsAPICollector
+from data_collection.news_collection.get_stock_news import get_news_for_queries
 
 
 def find_news_on_trending_stocks(days_ago_news: int, free_text: Optional[str] = None) -> List[NewsArticle]:
@@ -25,9 +25,7 @@ def find_news_on_trending_stocks(days_ago_news: int, free_text: Optional[str] = 
             f'{free_text} stocks',
         ]
     logger.info(f"Searching for news on trending stocks from {start_date} to {end_date} with queries: {search_queries}")
-    articles = []
-    for query in search_queries:
-        articles += NewsAPICollector(query).get_news_articles(num_articles=4, from_param=start_date)
+    articles = get_news_for_queries(search_queries, days_ago_news)
     return articles
 
 
