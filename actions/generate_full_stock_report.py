@@ -28,7 +28,7 @@ def perform_self_reflexion(current_report: StockSymbolReport, current_news_artic
 
 
 def generate_full_stock_report(stock_symbol: str, days_ago_news: int = 5,
-                               attempt_self_reflexion: bool = True) -> StockSymbolReport:
+                               attempt_self_reflexion: bool = False) -> StockSymbolReport:
     stock_news = get_stock_news(stock_symbol, days_ago_news)
     stock_report = generate_news_report(stock_symbol, stock_news)
     stock_info = get_stock_info(stock_symbol)
