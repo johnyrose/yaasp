@@ -8,30 +8,12 @@ from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_SEARCH_TERMS_FOR_SELF_REFLEXION
 from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
 from common.models.data_collection import NewsArticle, CompanyStockInfo
+from data_collection.news_collection.get_stock_news import get_stock_news
 from data_collection.news_collection.news_api_collector import NewsAPICollector
-from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info, \
-    get_company_name_from_symbol
+from data_collection.stock_data_collection.company_stock_data_collector import get_stock_info
 from common.models.stock_analysis import StockSymbolReport
 from stock_analysis.news_report_generator import generate_news_report
 from stock_analysis.stock_symbol_report_generator import generate_stock_symbol_report
-
-
-def get_stock_news(stock_symbol: str, days_ago_news: int = 5) -> List[NewsArticle]:
-    company_name = get_company_name_from_symbol(stock_symbol)
-    # TODO - If the stock symbol is an index, handle it accordingly and don't lookup a company name.
-
-    end_date = datetime.date.today()
-    start_date = end_date - datetime.timedelta(days=days_ago_news)
-
-    search_queries = [stock_symbol, company_name, f"{company_name} stock"]
-    articles = []
-    for query in search_queries:
-        try:
-            articles += NewsAPICollector(query).get_news_articles(num_articles=4, from_param=start_date)
-        except Exception as e:
-            logger.warning(f"Failed to get news for {query} with the following error: {e}")
-
-    return articles
 
 
 def perform_self_reflexion(current_report: StockSymbolReport, current_news_articles: List[NewsArticle],
