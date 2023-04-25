@@ -6,7 +6,7 @@ from common.db_utils import save_to_db
 from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_SEARCH_TERMS_FOR_SELF_REFLEXION
-from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
+from config import GENERATING_NEWS_REPORT_MODEL
 from common.models.data_collection import NewsArticle, CompanyStockInfo
 from data_collection.news_collection.get_stock_news import get_stock_news
 from data_collection.news_collection.news_api_collector import NewsAPICollector
@@ -23,7 +23,7 @@ def perform_self_reflexion(current_report: StockSymbolReport, current_news_artic
 
     prompt = GET_SEARCH_TERMS_FOR_SELF_REFLEXION.format(
         confidence_level_suggestions=current_report.confidence_explanation)
-    response = get_openai_response(prompt, OPENAI_MODEL_FOR_SIMPLE_TASKS)
+    response = get_openai_response(prompt, GENERATING_NEWS_REPORT_MODEL)
     search_terms = json.loads(response)
     for term in search_terms:
         try:

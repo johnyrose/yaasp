@@ -5,7 +5,7 @@ from typing import List, Optional
 from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.openai_prompts import GET_TRENDING_STOCKS
-from config import OPENAI_MODEL_FOR_SIMPLE_TASKS
+from config import SEARCHING_FOR_TRENDING_STOCKS_MODEL
 from common.models.data_collection import NewsArticle
 from data_collection.news_collection.news_api_collector import NewsAPICollector
 
@@ -39,7 +39,7 @@ def search_trending_stocks(days_ago_news: int = 2, free_text: Optional[str] = No
     retry_count = 4  # TODO - Make this configurable
     for i in range(retry_count):
         try:
-            response = get_openai_response(prompt, OPENAI_MODEL_FOR_SIMPLE_TASKS)
+            response = get_openai_response(prompt, SEARCHING_FOR_TRENDING_STOCKS_MODEL)
             response_json = json.loads(response)
             return response_json
         except Exception as e:

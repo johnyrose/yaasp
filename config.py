@@ -12,6 +12,7 @@ with open(config_path) as config_file:
 # Load sections
 api_keys = config.get("api_keys", {})
 news_sources_config = config.get("news_sources", ["newsapi", "marketaux"])
+models = config.get("models", {})
 openai_models = config.get("openai_models", {})
 reports_and_recommendations = config.get("reports_and_recommendations", {})
 directories = config.get("directories", {})
@@ -27,11 +28,19 @@ FINNHUB_API_KEY = os.getenv("FINNHUB_API_KEY", api_keys.get("finnhub_api_key"))
 # News sources
 NEWS_SOURCES_TO_USE = os.getenv("NEWS_SOURCES_TO_USE", news_sources_config)
 
-# OpenAI models
-OPENAI_MODEL_FOR_SIMPLE_TASKS = OpenAIModelType[os.getenv("OPENAI_MODEL_FOR_SIMPLE_TASKS",
-                                                          openai_models.get("simple_tasks", "GPT_35_TURBO"))]
-OPENAI_MODEL_FOR_COMPLICATED_TASKS = OpenAIModelType[os.getenv("OPENAI_MODEL_FOR_COMPLICATED_TASKS",
-                                                               openai_models.get("complicated_tasks", "GPT_4"))]
+# Model configurations
+GENERATING_NEWS_REPORT_MODEL = OpenAIModelType[os.getenv("GENERATING_NEWS_REPORT_MODEL",
+                                                         models.get("generating_news_report_model", "GPT_4"))]
+GENERATING_STOCK_SYMBOL_REPORT_MODEL = OpenAIModelType[os.getenv("GENERATING_STOCK_SYMBOL_REPORT_MODEL",
+                                                                 models.get("generating_stock_symbol_report_model", "GPT_4"))]
+GENERATING_PURCHASE_RECOMMENDATIONS_MODEL = \
+    OpenAIModelType[os.getenv("GENERATING_PURCHASE_RECOMMENDATIONS_MODEL",
+                              models.get("generating_purchase_recommendations_model", "GPT_4"))]
+SUMMARIZING_ARTICLES_MODEL = OpenAIModelType[os.getenv("SUMMARIZING_ARTICLES_MODEL",
+                                                       models.get("summarizing_articles_model", "GPT_35_TURBO"))]
+SEARCHING_FOR_TRENDING_STOCKS_MODEL = \
+    OpenAIModelType[os.getenv("SEARCHING_FOR_TRENDING_STOCKS_MODEL",
+                              models.get("searching_for_trending_stocks_model", "GPT_35_TURBO"))]
 
 # Reports and recommendations
 MAX_REPORTS_FOR_RECOMMENDATIONS = int(os.getenv("MAX_REPORTS_FOR_RECOMMENDATIONS",

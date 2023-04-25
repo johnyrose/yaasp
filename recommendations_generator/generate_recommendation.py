@@ -5,7 +5,7 @@ from common.db_utils import save_to_db
 from common.logger import logger
 from common.openai_adapter import get_openai_response
 from common.shorten_report import get_shortened_stock_symbol_report
-from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
+from config import GENERATING_PURCHASE_RECOMMENDATIONS_MODEL
 from common.openai_prompts import GET_STOCK_RECOMMENDATION
 from common.models.recommendations import RiskPreference, PurchaseRecommendation
 from common.models.stock_analysis import StockSymbolReport
@@ -28,7 +28,7 @@ def generate_purchase_recommendation(stock_reports: List[StockSymbolReport], cur
         try:
             prompt = GET_STOCK_RECOMMENDATION.format(stock_reports=stock_reports, current_situation=current_situation,
                                                      risk_preference=risk_preference)
-            response = get_openai_response(prompt, model_type=OPENAI_MODEL_FOR_COMPLICATED_TASKS)
+            response = get_openai_response(prompt, model_type=GENERATING_PURCHASE_RECOMMENDATIONS_MODEL)
             response_json = json.loads(response)
             logger.info(f"Got recommendations for stock reports. Recommendations: {response_json}")
             purchase_recommendation = PurchaseRecommendation(**response_json)

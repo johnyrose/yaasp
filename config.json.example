@@ -6,9 +6,12 @@
     "finnhub_api_key": ""
   },
   "news_sources": ["newsapi", "marketaux"],
-  "openai_models": {
-    "simple_tasks": "GPT_35_TURBO",
-    "complicated_tasks": "GPT_4"
+  "models": {
+    "generating_news_report_model": "GPT_4",
+    "generating_stock_symbol_report_model": "GPT_4",
+    "generating_purchase_recommendations_model": "GPT_4",
+    "summarizing_articles_model": "GPT_35_TURBO",
+    "searching_for_trending_stocks_model": "GPT_35_TURBO"
   },
   "reports_and_recommendations": {
     "max_reports": 12

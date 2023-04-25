@@ -1,7 +1,7 @@
 import json
 
 from common.logger import logger
-from config import OPENAI_MODEL_FOR_COMPLICATED_TASKS
+from config import GENERATING_STOCK_SYMBOL_REPORT_MODEL
 from common.models.data_collection import CompanyStockInfo
 from common.openai_prompts import GET_FULL_STOCK_REPORT
 from common.models.stock_analysis import StockNewsReport, StockSymbolReport
@@ -22,7 +22,7 @@ def generate_stock_symbol_report(stock_symbol: str, news_report: StockNewsReport
     retry_count = 4  # TODO - Make this configurable
     for i in range(retry_count):
         try:
-            openai_response = get_openai_response(prompt, OPENAI_MODEL_FOR_COMPLICATED_TASKS)
+            openai_response = get_openai_response(prompt, GENERATING_STOCK_SYMBOL_REPORT_MODEL)
             response_json = json.loads(openai_response)
             response_json["news_report"] = news_report
             response_json["data"] = stock_data

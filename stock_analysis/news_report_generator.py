@@ -3,7 +3,7 @@ from typing import List
 
 from common.db_utils import save_to_db
 from common.logger import logger
-from config import OPENAI_MODEL_FOR_SIMPLE_TASKS, OPENAI_MODEL_FOR_COMPLICATED_TASKS
+from config import SUMMARIZING_ARTICLES_MODEL, GENERATING_NEWS_REPORT_MODEL
 from common.models.data_collection import NewsArticle
 from common.openai_prompts import GET_ARTICLE_SUMMARY_PROMPT, GET_ARTICLE_NEWS_REPORT
 from common.models.stock_analysis import StockNewsReport, ArticleSummary
@@ -17,7 +17,7 @@ def get_articles_summaries(company_symbol: str, news_articles: List[NewsArticle]
         summary = get_openai_response(
             prompt=GET_ARTICLE_SUMMARY_PROMPT.format(company_name=company_symbol, title=article.title,
                                                      content=article.body),
-            model_type=OPENAI_MODEL_FOR_SIMPLE_TASKS)
+            model_type=SUMMARIZING_ARTICLES_MODEL)
         #  Making a summary is pretty "easy" for a language model, so we'll use the quicker and cheaper GPT3.5 model
         article_summaries.append(ArticleSummary(summary=summary, date=article.date))
     return article_summaries
@@ -30,7 +30,7 @@ def _get_news_report(stock_symbol: str, article_summaries: List[ArticleSummary])
     retry_count = 4  # TODO - Make this configurable
     for i in range(retry_count):
         try:
-            openai_response = get_openai_response(prompt=prompt, model_type=OPENAI_MODEL_FOR_COMPLICATED_TASKS)
+            openai_response = get_openai_response(prompt=prompt, model_type=GENERATING_NEWS_REPORT_MODEL)
             response_json = json.loads(openai_response)
             stock_news_report = StockNewsReport(**response_json)
             return stock_news_report
