@@ -15,9 +15,9 @@ from src.common.models.recommendations import RiskPreference
 @app.command()
 def generate_recommendation(input_file: str = typer.Option(..., help="A file containing the users current state,"
                                                                      " preferences, etc."),
-                            risk_preference: str = typer.Option(RiskPreference.MODERATE, help="The users risk "
-                                                                                              "preference. Can be:"
-                                                                                              " risky, moderate, safe"),
+                            risk_preference: str = typer.Option("moderate", help="The users risk "
+                                                                                 "preference. Can be:"
+                                                                                 " risky, moderate, safe"),
                             export_type: str = typer.Option(ExportType.JSON, help="Export type, can be json or pdf"),
                             days_ago_reports: int = typer.Option(2, help="Number of days old to consider reports "
                                                                          "valid. Older reports will be "

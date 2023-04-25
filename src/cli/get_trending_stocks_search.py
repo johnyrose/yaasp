@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from src.actions import search_trending_stocks
+from src.actions.search_trending_stocks import search_trending_stocks
 
 
 def get_trending_stocks_search(free_text: Optional[str] = None) -> List[str]:
