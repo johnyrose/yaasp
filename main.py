@@ -1,23 +1,15 @@
-import concurrent.futures
-from datetime import datetime, timedelta
 from typing import Optional
 
 import typer
 
-from src.actions import generate_full_stock_report
-from src.actions import search_trending_stocks
 from src.cli.generate_recommendation import generate_recommendation_for_file
 from src.cli.generate_stock_report_for_symbols import generate_stock_report_for_symbols
 from src.cli.get_latest_recommendation_export import get_latest_recommendation_export
 from src.cli.get_stock_reports import get_current_stock_reports
 from src.cli.get_trending_stocks_search import get_trending_stocks_search
-from src.cli.typer_objects import app, console
+from src.cli.typer_objects import app
 from src.common.models.export_type import ExportType
 from src.common.models.recommendations import RiskPreference
-from config import MAX_REPORT_FETCHING_THREADS, MAX_REPORTS_FOR_RECOMMENDATIONS
-from src.db.get_stock_symbol_reports import get_most_recent_stock_symbol_reports
-from src.export.export_reports import export_stock_report, export_purchase_recommendation
-from src.recommendations_generator.generate_recommendation import generate_purchase_recommendation
 
 
 @app.command()
@@ -30,6 +22,10 @@ def generate_recommendation(input_file: str = typer.Option(..., help="A file con
                             days_ago_reports: int = typer.Option(2, help="Number of days old to consider reports "
                                                                          "valid. Older reports will be "
                                                                          "ignored.")) -> None:
+    """
+    Generate a stock purchase recommendation based on the user's current situation, preferences, and the most recent
+    stock reports.
+    """
     file_name = generate_recommendation_for_file(input_file, risk_preference, export_type, days_ago_reports)
     if file_name:
         typer.echo(f"Generated recommendation file: {file_name}")
@@ -46,6 +42,9 @@ def generate_stock_report(symbols: str = typer.Option(..., help="List of stock s
                           export_type: str = typer.Option(ExportType.JSON, help="The type of file to "
                                                                                 "export to. "
                                                                                 "Can be json or pdf")) -> None:
+    """
+    Generate stock reports for the given symbols, with news and analysis from the specified number of days ago.
+    """
     symbol_list = symbols.split(',')
     exported_files = generate_stock_report_for_symbols(symbol_list, days_ago_news, attempt_self_reflexion, export_type)
     if exported_files:
@@ -58,6 +57,9 @@ def generate_stock_report(symbols: str = typer.Option(..., help="List of stock s
 
 @app.command()
 def get_latest_recommendation(export_type: str = typer.Option("json", help="Export type, can be json or pdf")) -> None:
+    """
+    Get the most recent stock purchase recommendation and export it to the specified format.
+    """
     exported_rec = get_latest_recommendation_export(export_type)
     if exported_rec:
         typer.echo(f"Latest recommendation file: {exported_rec}")
@@ -68,6 +70,10 @@ def get_latest_recommendation(export_type: str = typer.Option("json", help="Expo
 @app.command()
 def get_stock_reports(latest: bool = typer.Option(True, help="Show only the latest stock report for each symbol"),
                       export_type: str = typer.Option("json", help="Export type, can be json or pdf")) -> None:
+    """
+    Get the current stock reports for all symbols, optionally showing only the latest reports,
+     and export them to the specified format.
+    """
     exported_files = get_current_stock_reports(latest, export_type)
     if exported_files:
         typer.echo("Generated stock reports:")
@@ -82,6 +88,9 @@ def get_trending_stocks(free_text: Optional[str] = typer.Option(None, help="Free
                                                                            " to search for. If not provided, "
                                                                            "general trending stocks will be "
                                                                            "searched.")) -> None:
+    """
+    Get current trending stocks, optionally searching for a specific free text.
+    """
     trending_stocks = get_trending_stocks_search(free_text)
     if trending_stocks:
         typer.echo("Trending stocks:")
