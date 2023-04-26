@@ -164,7 +164,7 @@ yaasp --help
 This process can take 5-10 minutes, depending on the news sources and the OpenAI models used.
 
 ```commandline
-yaasp generate-stock-report --symbols msft,aapl,amzn --export_type json
+yaasp generate-stock-report --symbols msft,aapl,amzn --export-type json
 
 // OUTPUT:
 Generated stock reports:
@@ -201,7 +201,7 @@ Generated stock reports:
   ```
 
 ```commandline
-yaasp generate-recommendation --input_file input.txt --export_type pdf
+yaasp generate-recommendation --input-file input.txt --export-type pdf
 
 # OUTPUT:
 Generated recommendation file: exports/recommendations/PurchaseRecommendation_2023-04-25-16:50:05.pdf
