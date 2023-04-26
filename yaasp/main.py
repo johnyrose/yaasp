@@ -99,5 +99,16 @@ def get_trending_stocks(free_text: Optional[str] = typer.Option(None, help="Free
         typer.echo("No trending stocks found.")
 
 
+@app.callback()
+def main(ctx: typer.Context):
+    """
+    Your Automated Stock Advisor and Portfolio Strategist (Y.A.A.S.P.) is a command-line tool that provides
+    stock recommendations, generates stock reports, and assists with portfolio management.
+    """
+    if ctx.invoked_subcommand is None:
+        typer.echo(ctx.get_help())
+        raise typer.Exit()
+
+
 if __name__ == "__main__":
     app()
