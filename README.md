@@ -22,6 +22,17 @@ Once the user has generated stock symbol reports for the stocks they are interes
 * [Stock symbol report](docs/StockSymbolReport_Example.pdf) - A report on a single stock symbol
 * [Stock purchase recommendation](docs/PurchaseRecommendation_example.pdf) - A recommendation on which stock to buy based on user preferences and existing stock symbol reports
 
+## Flow diagrams:
+
+* Generating stock symbol report:
+
+![getting-stock-report](https://user-images.githubusercontent.com/26342860/234531794-e9c0f6f9-357c-43c2-bd0c-8815f0b33aa8.PNG)
+
+* Generating purchase recommendation:
+
+
+
+
 ## Installation
 
 To install yaasta, simply clone the repository and run the following command:
