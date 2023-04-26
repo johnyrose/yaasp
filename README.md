@@ -31,7 +31,7 @@ I am not a financial advisor, and this tool is not meant to be used as a financi
 * Generate full stock symbol reports for given stock symbols
 * Generate stock purchase recommendations based on user preferences and existing stock symbol reports
 * Search for trending stocks based on latest news articles
-* Export reports and recommendations as PDF or JSON
+* Export reports and recommendations as PDF or JSON 
 
 ## Output examples:
 
