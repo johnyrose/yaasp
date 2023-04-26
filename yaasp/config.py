@@ -8,6 +8,7 @@ from yaasp.common.models.stock_analysis import OpenAIModelType
 # Load JSON configuration
 config_path = os.getenv("CONFIG_PATH", "../config.json")
 
+config = {}
 try:
     with open(config_path) as config_file:
         config = json.load(config_file)
