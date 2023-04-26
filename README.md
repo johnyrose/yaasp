@@ -62,6 +62,12 @@ To install yaasp, simply clone the repository and run the following command:
 pip install -r requirements.txt
 ```
 
+You can also install it as a CLI tool by running:
+
+```commandline
+ pip install git+https://github.com/johnyrose/yaasp.git
+```
+
 ## Getting started
 
 The tool uses the following external services at the moment:
