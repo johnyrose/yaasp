@@ -8,8 +8,6 @@ This is done by fetching recent news articles about given stocks and fetching th
 
 Once the user has generated stock symbol reports for the stocks they are interested in, they can generate a stock purchase recommendation by providing a short description of their preferences.
 
-
-
 ## Features
 
 * Generate full stock symbol reports for given stock symbols
@@ -24,12 +22,13 @@ Once the user has generated stock symbol reports for the stocks they are interes
 
 ## Flow diagrams:
 
-* Generating stock symbol report:
+* **Generating stock symbol report:**
 
 ![getting-stock-report](https://user-images.githubusercontent.com/26342860/234531794-e9c0f6f9-357c-43c2-bd0c-8815f0b33aa8.PNG)
 
-* Generating purchase recommendation:
+* **Generating purchase recommendation:**
 
+![recommendation](https://user-images.githubusercontent.com/26342860/234533575-7071044b-23fe-4491-a46a-14d7a21c71ea.PNG)
 
 
 
