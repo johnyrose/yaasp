@@ -22,21 +22,6 @@ Once the user has generated stock symbol reports for the stocks they are interes
 * [Stock symbol report](docs/StockSymbolReport_Example.pdf) - A report on a single stock symbol
 * [Stock purchase recommendation](docs/PurchaseRecommendation_example.pdf) - A recommendation on which stock to buy based on user preferences and existing stock symbol reports
 
-## Quick Video usage examples:
-
-* Generating stock reports:
-
-https://user-images.githubusercontent.com/26342860/234519340-77b056ee-c5df-4f8c-9c94-00a2b73820fd.mp4
-
-* Generating stock recommendation:
-
-https://user-images.githubusercontent.com/26342860/234519432-e4a13ecf-10e4-415e-b45f-88600a760e64.mp4
-
-* Getting trending stocks:
-
-https://user-images.githubusercontent.com/26342860/234519503-3f4b8961-133f-4150-b119-546b9ffef5ae.mp4
-
-
 ## Installation
 
 To install yaasta, simply clone the repository and run the following command:
@@ -109,12 +94,36 @@ Generated stock reports:
   exports/stock_symbol_reports/StockSymbolReport_AAPL-2023-04-25-16:17:55.json
 ```
 
+### Show the help message
+```commandline
+python main.py --help
+
+# OUTPUT:
+
+ Usage: main.py [OPTIONS] COMMAND [ARGS]...
+
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion        [bash|zsh|fish|powershell|pwsh]  Install completion for the specified shell. [default: None]                                                                   │
+│ --show-completion           [bash|zsh|fish|powershell|pwsh]  Show completion for the specified shell, to copy it or customize the installation. [default: None]                            │
+│ --help                                                       Show this message and exit.                                                                                                   │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ generate-recommendation         Generate a stock purchase recommendation based on the user's current situation, preferences, and the most recent stock reports.                            │
+│ generate-stock-report           Generate stock reports for the given symbols, with news and analysis from the specified number of days ago.                                                │
+│ get-latest-recommendation       Get the most recent stock purchase recommendation and export it to the specified format.                                                                   │
+│ get-stock-reports               Get the current stock reports for all symbols, optionally showing only the latest reports, and export them to the specified format.                        │
+│ get-trending-stocks             Get current trending stocks, optionally searching for a specific free text.                                                                                │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+```
+
 ### Generate a stock recommendation based on user preferences & existing stock reports
 ```commandline
 echo "I like technology and video games and I'm looking to start investing with 1000$" > input.txt
 yaasta generate-recommendation --input_file input.txt --export_type pdf
 
-// OUTPUT:
+# OUTPUT:
 Generated recommendation file: exports/recommendations/PurchaseRecommendation_2023-04-25-16:50:05.pdf
 ```
 
@@ -122,10 +131,25 @@ Generated recommendation file: exports/recommendations/PurchaseRecommendation_20
 ```commandline
 yaasta get-trending-stocks --free-text "video games"
 
-// OUTPUT:
+# OUTPUT:
 Trending stocks:
   ATVI
   EA
   TTWO
 
 ```
+
+
+## Quick Video usage examples:
+
+* Generating stock reports:
+
+https://user-images.githubusercontent.com/26342860/234519340-77b056ee-c5df-4f8c-9c94-00a2b73820fd.mp4
+
+* Generating stock recommendation:
+
+https://user-images.githubusercontent.com/26342860/234519432-e4a13ecf-10e4-415e-b45f-88600a760e64.mp4
+
+* Getting trending stocks:
+
+https://user-images.githubusercontent.com/26342860/234519503-3f4b8961-133f-4150-b119-546b9ffef5ae.mp4
