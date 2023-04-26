@@ -18,7 +18,7 @@ def generate_recommendation(input_file: str = typer.Option(..., help="A file con
                             risk_preference: str = typer.Option("moderate", help="The users risk "
                                                                                  "preference. Can be:"
                                                                                  " risky, moderate, safe"),
-                            export_type: str = typer.Option(ExportType.JSON, help="Export type, can be json or pdf"),
+                            export_type: str = typer.Option('json', help="Export type, can be json or pdf"),
                             days_ago_reports: int = typer.Option(2, help="Number of days old to consider reports "
                                                                          "valid. Older reports will be "
                                                                          "ignored.")) -> None:
