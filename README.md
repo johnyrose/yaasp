@@ -22,8 +22,9 @@ I am not a financial advisor, and this tool is not meant to be used as a financi
 * [Flow diagrams](#flow-diagrams)
 * [Installation](#installation)
 * [Getting started](#getting-started)
-* [Saved information](#saved-information)
-* [Quick videos usage examples](#quick-videos-usage-examples)
+* [Commands](#commands)
+* [Quick video usage examples](#quick-video-usage-examples)
+* [Final notes](#final-notes)
 
 ## Features
 
@@ -117,6 +118,7 @@ Getting the API keys should take around 10 minutes. Once you have done so, creat
 Here are some examples of how to use the yaasta CLI:
 
 
+## Commands
 ### Show the help message
 ```commandline
 python main.py --help
@@ -218,7 +220,7 @@ Generated recommendation file: exports/recommendations/PurchaseRecommendation_20
 
   
 
-## Quick Video usage examples:
+## Quick Video usage examples
 
 * Generating stock reports:
 
@@ -231,3 +233,8 @@ https://user-images.githubusercontent.com/26342860/234519432-e4a13ecf-10e4-415e-
 * Getting trending stocks:
 
 https://user-images.githubusercontent.com/26342860/234519503-3f4b8961-133f-4150-b119-546b9ffef5ae.mp4
+
+
+### Final notes
+
+Thank you very much for checking it out! This was a fun side project to make. I hope you find it useful and I'm always open for feedback and suggestions.
