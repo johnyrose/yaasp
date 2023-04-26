@@ -1,6 +1,6 @@
-# Yet Another AI Stock Advisor (YAASTA)
+# Yet Another AI Stocks Program
 
-Yet Another AI Stock Advisor (yaasta) is a stock recommendation tool that aims to give decent stock purchase recommendations. 
+Yet Another AI Stocks Program (yaasp) is a stock recommendation CLI tool that aims to give decent stock purchase recommendations. 
 
 It aims to represent the "reasonable person" that researches companies by reading news, analyzing their financial statements and comparing them to the rest of the market.
 
@@ -56,7 +56,7 @@ I am not a financial advisor, and this tool is not meant to be used as a financi
 
 ## Installation
 
-To install yaasta, simply clone the repository and run the following command:
+To install yaasp, simply clone the repository and run the following command:
 
 ```bash
 pip install -r requirements.txt
@@ -119,7 +119,7 @@ Getting the API keys should take around 10 minutes. Once you have done so, creat
 * All the reports are saved to a local SQLITE database.
 * Any command that generates reports will export them to the `exports` directory. which will be created if it does not exist.
 
-Here are some examples of how to use the yaasta CLI:
+Here are some examples of how to use the yaasp CLI:
 
 
 ## Commands
@@ -147,7 +147,7 @@ python main.py --help
 
 ### Generate current stock reports for specified symbols
 ```commandline
-yaasta generate-stock-report --symbols msft,aapl,amzn --export_type json
+yaasp generate-stock-report --symbols msft,aapl,amzn --export_type json
 
 // OUTPUT:
 Generated stock reports:
@@ -184,7 +184,7 @@ Generated stock reports:
   ```
 
 ```commandline
-yaasta generate-recommendation --input_file input.txt --export_type pdf
+yaasp generate-recommendation --input_file input.txt --export_type pdf
 
 # OUTPUT:
 Generated recommendation file: exports/recommendations/PurchaseRecommendation_2023-04-25-16:50:05.pdf
@@ -193,7 +193,7 @@ Generated recommendation file: exports/recommendations/PurchaseRecommendation_20
 ### Search for trending stocks
 
 ```commandline
-yaasta get-trending-stocks --free-text "video games"
+yaasp get-trending-stocks --free-text "video games"
 
 # OUTPUT:
 Trending stocks:
@@ -208,7 +208,7 @@ Trending stocks:
 You can use the `get-stock-reports` and `get-latest-recommendation` commands to fetch existing data from the database.
 
 ```commandline
-yaasta get-stock-reports --export-type json
+yaasp get-stock-reports --export-type json
 # OUTPUT:
 Generated stock reports:
   exports/stock_symbol_reports/StockSymbolReport_MSFT-2023-04-25-16:17:55.json
@@ -217,7 +217,7 @@ Generated stock reports:
 ```
 
 ```commandline
-yaasta get-latest-recommendation --export-type pdf
+yaasp get-latest-recommendation --export-type pdf
 # OUTPUT:
 Generated recommendation file: exports/recommendations/PurchaseRecommendation_2023-04-25-16:50:05.pdf 
 ```
