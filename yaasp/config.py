@@ -1,13 +1,18 @@
 import json
 import os
 
+from yaasp.common.logger import logger
 from yaasp.common.models.stock_analysis import OpenAIModelType
 
 
 # Load JSON configuration
 config_path = os.getenv("CONFIG_PATH", "../config.json")
-with open(config_path) as config_file:
-    config = json.load(config_file)
+
+try:
+    with open(config_path) as config_file:
+        config = json.load(config_file)
+except FileNotFoundError:
+    logger.warning(f"Config file not found at {config_path}. Make sure to create it according to the documentation.")
 
 # Load sections
 api_keys = config.get("api_keys", {})
