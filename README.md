@@ -8,6 +8,23 @@ This is done by fetching recent news articles about given stocks and fetching th
 
 Once the user has generated stock symbol reports for the stocks they are interested in, they can generate a stock purchase recommendation by providing a short description of their preferences.
 
+
+This is basically my attempt at reading the stock market using AI. 
+
+### An obvious but needed disclaimer
+
+I am not a financial advisor, and this tool is not meant to be used as a financial advisor. This is nothing more than a fun side project that I am working on in my free time.
+
+## Table of contents
+
+* [Features](#features)
+* [Output examples](#output-examples)
+* [Flow diagrams](#flow-diagrams)
+* [Installation](#installation)
+* [Getting started](#getting-started)
+* [Saved information](#saved-information)
+* [Quick videos usage examples](#quick-videos-usage-examples)
+
 ## Features
 
 * Generate full stock symbol reports for given stock symbols
@@ -92,6 +109,11 @@ Getting the API keys should take around 10 minutes. Once you have done so, creat
 
 **NOTE**: At the time of writing, GPT4 API is in beta and not everyone will have access to it. If you do not have access, change all GPT4 items in the config to GPT3.5. You may also do it to save some money in API calls.
 
+### Saved information
+
+* All the reports are saved to a local SQLITE database.
+* Any command that generates reports will export them to the `exports` directory. which will be created if it does not exist.
+
 Here are some examples of how to use the yaasta CLI:
 
 
@@ -129,8 +151,33 @@ Generated stock reports:
 ```
 
 ### Generate a stock recommendation based on user preferences & existing stock reports
+
+* Once you generated stock symbol reports, you can use them & your preferences to generate a purchase recommendation.
+* You'll need to create a local text file, and write your preferences there
+* These preferences are, essentially, anything you want the AI to know when recommending stocks for you. I would suggest including:
+  * Your current portfolio
+  * Your budget
+  * Industries you prefer
+  * Your investment goals (e.g. long term, short term, etc.)
+  * For example:
+  ```text
+    input.txt:
+  
+    Here is my current portfolio:
+    "Symbol","Description","Quantity","MarkPrice","FifoPnlUnrealized","OpenPrice","ReportDate"
+    "AAPL","APPLE INC","1","165.33","-1.45","166.78","2023-04-24"
+    "AMD","ADVANCED MICRO DEVICES","5","87.57","-33.5","94.27","2023-04-24"
+    "AMZN","AMAZON.COM INC","20","106.21","-0.3","106.225","2023-04-24"
+    "GOOGL","ALPHABET INC-CL A","9","105.97","-3.044","106.308222222","2023-04-24"
+    "INTC","INTEL CORP","10","29.66","-35.55","33.215","2023-04-24"
+    "MSFT","MICROSOFT CORP","2","281.77","-9.66","286.6","2023-04-24"
+    "NVDA","NVIDIA CORP","4","270.42","-13.78","273.865","2023-04-24"
+    
+    I am looking to invest in the long run. I don't care for short term gains. I have 2000 USD to invest
+
+  ```
+
 ```commandline
-echo "I like technology and video games and I'm looking to start investing with 1000$" > input.txt
 yaasta generate-recommendation --input_file input.txt --export_type pdf
 
 # OUTPUT:
@@ -138,6 +185,7 @@ Generated recommendation file: exports/recommendations/PurchaseRecommendation_20
 ```
 
 ### Search for trending stocks
+
 ```commandline
 yaasta get-trending-stocks --free-text "video games"
 
@@ -148,6 +196,27 @@ Trending stocks:
   TTWO
 
 ```
+
+### Fetching existing data
+
+You can use the `get-stock-reports` and `get-latest-recommendation` commands to fetch existing data from the database.
+
+```commandline
+yaasta get-stock-reports --export-type json
+# OUTPUT:
+Generated stock reports:
+  exports/stock_symbol_reports/StockSymbolReport_MSFT-2023-04-25-16:17:55.json
+  exports/stock_symbol_reports/StockSymbolReport_AMZN-2023-04-25-16:17:55.json
+  exports/stock_symbol_reports/StockSymbolReport_AAPL-2023-04-25-16:17:55.json
+```
+
+```commandline
+yaasta get-latest-recommendation --export-type pdf
+# OUTPUT:
+Generated recommendation file: exports/recommendations/PurchaseRecommendation_2023-04-25-16:50:05.pdf 
+```
+
+  
 
 ## Quick Video usage examples:
 
