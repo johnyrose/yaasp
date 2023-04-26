@@ -14,7 +14,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "yaasp=yaasp.main:app",  # Replace with the correct path to your Typer app
+            "yaasp=yaasp.__main__:app",  # Replace with the correct path to your Typer app
         ],
     },
     classifiers=[
