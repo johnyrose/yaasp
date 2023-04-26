@@ -131,7 +131,7 @@ Here are some examples of how to use the yaasp CLI:
 ## Commands
 ### Show the help message
 ```commandline
-python main.py --help
+yaasp --help
 
 # OUTPUT:
 
