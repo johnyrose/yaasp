@@ -2,6 +2,7 @@ from typing import Optional
 
 import typer
 
+from yaasp.cli.errors_decorator import exception_handler
 from yaasp.cli.generate_recommendation import generate_recommendation_for_file
 from yaasp.cli.generate_stock_report_for_symbols import generate_stock_report_for_symbols
 from yaasp.cli.get_latest_recommendation_export import get_latest_recommendation_export
@@ -12,6 +13,7 @@ from yaasp.common.models.export_type import ExportType
 
 
 @app.command()
+@exception_handler
 def generate_recommendation(input_file: str = typer.Option(..., help="A file containing the users current state,"
                                                                      " preferences, etc."),
                             risk_preference: str = typer.Option("moderate", help="The users risk "
@@ -33,6 +35,7 @@ def generate_recommendation(input_file: str = typer.Option(..., help="A file con
 
 
 @app.command()
+@exception_handler
 def generate_stock_report(symbols: str = typer.Option(..., help="List of stock symbols separated by commas,"
                                                                 " like msft,aapl,amzn"),
                           days_ago_news: int = typer.Option(5, help="Number of days ago to fetch news"),
@@ -55,6 +58,7 @@ def generate_stock_report(symbols: str = typer.Option(..., help="List of stock s
 
 
 @app.command()
+@exception_handler
 def get_latest_recommendation(export_type: str = typer.Option("json", help="Export type, can be json or pdf")) -> None:
     """
     Get the most recent stock purchase recommendation and export it to the specified format.
@@ -67,6 +71,7 @@ def get_latest_recommendation(export_type: str = typer.Option("json", help="Expo
 
 
 @app.command()
+@exception_handler
 def get_stock_reports(latest: bool = typer.Option(True, help="Show only the latest stock report for each symbol"),
                       export_type: str = typer.Option("json", help="Export type, can be json or pdf")) -> None:
     """
@@ -83,6 +88,7 @@ def get_stock_reports(latest: bool = typer.Option(True, help="Show only the late
 
 
 @app.command()
+@exception_handler
 def get_trending_stocks(free_text: Optional[str] = typer.Option(None, help="Free text"
                                                                            " to search for. If not provided, "
                                                                            "general trending stocks will be "
@@ -100,6 +106,7 @@ def get_trending_stocks(free_text: Optional[str] = typer.Option(None, help="Free
 
 
 @app.callback()
+@exception_handler
 def main(ctx: typer.Context):
     """
     Your Automated Stock Advisor and Portfolio Strategist (Y.A.A.S.P.) is a command-line tool that provides
