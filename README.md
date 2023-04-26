@@ -129,6 +129,14 @@ Here are some examples of how to use the yaasp CLI:
 
 
 ## Commands
+
+* NOTE: If you cloned the code locally and installed the requirements, you can run the commandline by using:
+
+```commandline
+python -m yaasp ...
+```
+Instead of `yaasp ...`
+
 ### Show the help message
 ```commandline
 yaasp --help
