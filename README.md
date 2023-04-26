@@ -139,7 +139,6 @@ Trending stocks:
 
 ```
 
-
 ## Quick Video usage examples:
 
 * Generating stock reports:
