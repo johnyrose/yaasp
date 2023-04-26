@@ -1,0 +1,31 @@
+{
+    "stock_recommendations": [
+        {
+            "symbol": "MSFT",
+            "target_price": 281.77,
+            "position": "LONG",
+            "amount": 3,
+            "explanation": "Microsoft has shown strong growth in its cloud computing business and continues to invest in artificial intelligence, with a positive outlook from analysts. It is a competitive long-term investment with moderate risk preference.",
+            "timestamp": "2023-04-26 11:13:04"
+        },
+        {
+            "symbol": "GOOGL",
+            "target_price": 105.97,
+            "position": "LONG",
+            "amount": 1,
+            "explanation": "Alphabet has a strong financial standing with diversified revenue streams and growth potential in artificial intelligence, making it a suitable long-term investment with moderate risk preference.",
+            "timestamp": "2023-04-26 11:13:04"
+        },
+        {
+            "symbol": "AMZN",
+            "target_price": 106.21,
+            "position": "LONG",
+            "amount": 1,
+            "explanation": "Amazon is expanding its chip development for AWS, and the release of AI-powered tool Bedrock Analytics shows growth potential and increased competitiveness. It is a strong long-term investment choice with moderate risk preference.",
+            "timestamp": "2023-04-26 11:13:04"
+        }
+    ],
+    "explanation": "Based on your moderate risk preference and long-term investment goals, the selected stocks are MSFT, GOOGL, and AMZN. These companies have shown strong growth in their respective sectors, and their investments in technology show potential for future growth. The confidence level is set at 7 out of 10 due to recent information, strong growth potential, and overall financial perspective.",
+    "confidence_level": 7,
+    "timestamp": "2023-04-26 11:13:04"
+}

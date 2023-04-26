@@ -35,8 +35,12 @@ I am not a financial advisor, and this tool is not meant to be used as a financi
 
 ## Output examples:
 
-* [Stock symbol report](docs/StockSymbolReport_Example.pdf) - A report on a single stock symbol
-* [Stock purchase recommendation](docs/PurchaseRecommendation_example.pdf) - A recommendation on which stock to buy based on user preferences and existing stock symbol reports
+* JSON:
+  * [Stock symbol report](docs/StockSymbolReport_example.json) - A JSON report on a single stock symbol
+  * [Stock purchase recommendation](docs/PurchaseRecommendation_example.json) - A JSON recommendation on which stock to buy based on user preferences and existing stock symbol reports
+* PDF:
+  * [Stock symbol report](docs/StockSymbolReport_Example.pdf) - A PDF report on a single stock symbol
+  * [Stock purchase recommendation](docs/PurchaseRecommendation_example.pdf) - A PDF recommendation on which stock to buy based on user preferences and existing stock symbol reports
 
 ## Flow diagrams:
 

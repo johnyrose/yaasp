@@ -1,0 +1,133 @@
+{
+    "timestamp": "2023-04-26 10:53:50",
+    "stock_symbol": "MSFT",
+    "news_report": {
+        "stock_symbol": "MSFT",
+        "news_summary": "Microsoft (MSFT) is experiencing growth in its cloud computing business, with Azure becoming a major player. Investments in artificial intelligence, such as its $1 billion investment in OpenAI, and collaborations with other tech giants (such as Alphabet) keep MSFT competitive. Analysts and hedge funds are bullish on MSFT, considering it a strong long-term bet.",
+        "financial_information": "Microsoft's revenue and earnings consistently grow, and hedge funds are increasing their investments.",
+        "general_sentiment": "POSITIVE",
+        "sentiment_reason": "Strong long-term investment opportunities in cloud computing and AI drive positive outlook.",
+        "articles_summary": [
+            {
+                "summary": "MSFT involved in overemployment trend as the use of AI tools increases, creating opportunities for individuals to hold multiple full-time jobs.",
+                "date": "2023-04-23T02:59:00Z"
+            },
+            {
+                "summary": "Despite lagging behind in the stock market, investors remain skeptical about the impact of Windows 11 on MSFT's long-term growth prospects.",
+                "date": "2023-04-24T19:56:07Z"
+            },
+            {
+                "summary": "Microsoft's Azure competes closely with Alphabet's DeepMind in AI market through their different approaches and partnerships.",
+                "date": "2023-04-21T16:00:00Z"
+            },
+            {
+                "summary": "Custom AI chips developed by industry giants may impact Nvidia, but MSFT's expanding data center offerings could mitigate potential effects.",
+                "date": "2023-04-24T13:24:22Z"
+            },
+            {
+                "summary": "Polen Capital supports MSFT as a strong long-term investment due to its dominant position and diversified product portfolio.",
+                "date": "2023-04-25T06:48:44Z"
+            },
+            {
+                "summary": "Upcoming earnings reports for MSFT and Amazon show potential for strong performance due to cloud computing and software demand.",
+                "date": "2023-04-25T01:23:01Z"
+            },
+            {
+                "summary": "Hedge funds recommend MSFT as a top Fast Money stock due to consistent growth and investment in the technology sector.",
+                "date": "2023-04-21T17:07:56Z"
+            },
+            {
+                "summary": "MSFT's upcoming first-quarter earnings report is expected to reflect the company's success driven by its focus on cloud computing and AI.",
+                "date": "2023-04-23T11:44:36Z"
+            }
+        ],
+        "timestamp": "2023-04-26 10:53:50"
+    },
+    "data": {
+        "industry": "Software\u2014Infrastructure",
+        "sector": "Technology",
+        "fullTimeEmployees": 221000,
+        "previousClose": 281.77,
+        "open": 279.51,
+        "dayLow": 275.37,
+        "dayHigh": 281.6,
+        "regularMarketVolume": 45772236,
+        "marketCap": 2050171469824,
+        "fiftyTwoWeekLow": 213.43,
+        "fiftyTwoWeekHigh": 294.18,
+        "twoHundredDayAverage": 255.4261,
+        "trailingAnnualDividendYield": 0.009227384,
+        "sharesShort": 41113563,
+        "heldPercentInstitutions": 0.73658997,
+        "pegRatio": 2.53,
+        "exchange": "NMS",
+        "symbol": "MSFT",
+        "underlyingSymbol": "MSFT",
+        "description": "Microsoft Corporation",
+        "bid": 0.0,
+        "ask": 0.0,
+        "last": 0.0,
+        "change": 0.0,
+        "days_range": "275.37-281.6",
+        "fifty_two_week_range": "213.43-294.18",
+        "volume": 45772236,
+        "avg_volume": 24904160,
+        "pe_ratio": 30.199564,
+        "eps": 9.12,
+        "earnings_date": "",
+        "dividend": 2.72,
+        "dividend_yield": 0.0097,
+        "ex_dividend_date": "1684281600",
+        "company_earnings": [
+            {
+                "actual": 2.45,
+                "estimate": 2.2757,
+                "period": "2023-09-30",
+                "quarter": 3,
+                "surprise": 0.1743,
+                "surprisePercent": 7.6592,
+                "symbol": "MSFT",
+                "year": 2023
+            },
+            {
+                "actual": 2.32,
+                "estimate": 2.3408,
+                "period": "2023-06-30",
+                "quarter": 2,
+                "surprise": -0.0208,
+                "surprisePercent": -0.8886,
+                "symbol": "MSFT",
+                "year": 2023
+            },
+            {
+                "actual": 2.35,
+                "estimate": 2.3488,
+                "period": "2023-03-31",
+                "quarter": 1,
+                "surprise": 0.0012,
+                "surprisePercent": 0.0511,
+                "symbol": "MSFT",
+                "year": 2023
+            },
+            {
+                "actual": 2.23,
+                "estimate": 2.3386,
+                "period": "2022-12-31",
+                "quarter": 4,
+                "surprise": -0.1086,
+                "surprisePercent": -4.6438,
+                "symbol": "MSFT",
+                "year": 2022
+            }
+        ],
+        "timestamp": "2023-04-26 10:53:50"
+    },
+    "stock_recommendation": "BUY",
+    "stock_recommendation_reason": "Microsoft has shown strong growth in its cloud computing business and continues to invest in artificial intelligence. Collaborations with other tech giants and positive outlook from analysts indicate strong potential for future growth.",
+    "position_recommendation": "LONG",
+    "position_recommendation_reason": "Microsoft's investments in key areas such as cloud computing and artificial intelligence put it in a strong position for long-term growth. A long position in MSFT stock seems justified given its competitive position and growth potential.",
+    "confidence_level": 8,
+    "stock_score": 7,
+    "stock_score_explanation": "MSFT's stock score is calculated as follows: \n1. Financial health: 2 points (due to lack of industry average data for comparison) \n2. Growth potential: 2.67 points \n  a. Revenue and earnings growth rates: 1.67 points (greater than industry average) \n  b. Company guidance: 1 point (positive, but unable to determine credibility) \n3. Recent news: 2.33 points \n  a. Azure cloud growth: 1.11 points \n  b. $1 billion investment in OpenAI: 1.11 points \n  c. Collaboration with Alphabet: 1.11 points \nOverall, the final stock score is 7 out of 10, indicating an attractive investment opportunity.",
+    "confidence_explanation": "The confidence level is set at 8 out of 10 due to the recent and relevant information on MSFT, its strong financial performance, partnerships, and positive analyst recommendations. However, there is room for improvement in obtaining detailed industry averages for financial ratios and closely monitoring company guidance."
+}
