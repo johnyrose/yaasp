@@ -160,6 +160,9 @@ yaasp --help
 ```
 
 ### Generate current stock reports for specified symbols
+
+This process can take 5-10 minutes, depending on the news sources and the OpenAI models used.
+
 ```commandline
 yaasp generate-stock-report --symbols msft,aapl,amzn --export_type json
 
