@@ -83,16 +83,6 @@ Getting the API keys should take around 10 minutes. Once you have done so, creat
 
 Here are some examples of how to use the yaasta CLI:
 
-### Generate current stock reports for specified symbols
-```commandline
-yaasta generate-stock-report --symbols msft,aapl,amzn --export_type json
-
-// OUTPUT:
-Generated stock reports:
-  exports/stock_symbol_reports/StockSymbolReport_MSFT-2023-04-25-16:17:55.json
-  exports/stock_symbol_reports/StockSymbolReport_AMZN-2023-04-25-16:17:55.json
-  exports/stock_symbol_reports/StockSymbolReport_AAPL-2023-04-25-16:17:55.json
-```
 
 ### Show the help message
 ```commandline
@@ -114,8 +104,17 @@ python main.py --help
 │ get-stock-reports               Get the current stock reports for all symbols, optionally showing only the latest reports, and export them to the specified format.                        │
 │ get-trending-stocks             Get current trending stocks, optionally searching for a specific free text.                                                                                │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
 
+### Generate current stock reports for specified symbols
+```commandline
+yaasta generate-stock-report --symbols msft,aapl,amzn --export_type json
 
+// OUTPUT:
+Generated stock reports:
+  exports/stock_symbol_reports/StockSymbolReport_MSFT-2023-04-25-16:17:55.json
+  exports/stock_symbol_reports/StockSymbolReport_AMZN-2023-04-25-16:17:55.json
+  exports/stock_symbol_reports/StockSymbolReport_AAPL-2023-04-25-16:17:55.json
 ```
 
 ### Generate a stock recommendation based on user preferences & existing stock reports
