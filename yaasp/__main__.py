@@ -41,7 +41,7 @@ def generate_stock_report(symbols: str = typer.Option(..., help="List of stock s
                           days_ago_news: int = typer.Option(5, help="Number of days ago to fetch news"),
                           attempt_self_reflexion: bool = typer.Option(False, help="Attempt self reflexion"
                                                                                   " for the report"),
-                          export_type: str = typer.Option(ExportType.JSON, help="The type of file to "
+                          export_type: str = typer.Option('json', help="The type of file to "
                                                                                 "export to. "
                                                                                 "Can be json or pdf")) -> None:
     """
